@@ -1,0 +1,21 @@
+{
+  "scope": "Real external email request received through Gmail IMAP, ten-document ZIP reply accepted by Gmail SMTP, and recipient confirmed receiving the reply and ZIP.",
+  "status": "sent",
+  "outcome": "success",
+  "matter_number": "M12205",
+  "category": "Other Documents",
+  "file_count": 10,
+  "processing_seconds_before_smtp": 14.692,
+  "zip_bytes": 6683061,
+  "checks": [
+    "real incoming email",
+    "reply addressed to actual incoming sender",
+    "ten MIME attachment entries",
+    "ZIP CRC",
+    "all file sizes and SHA-256",
+    "SMTP accepted reply",
+    "recipient confirmed external inbox receipt with ZIP"
+  ],
+  "personal_details": "Addresses, message IDs, credentials, and email text omitted.",
+  "recipient_confirmation": "User confirmed receiving the reply and ZIP in the external inbox."
+}

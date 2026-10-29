@@ -1,0 +1,253 @@
+{
+  "scope": "Four synthetic ambiguity smoke tests, one API call per email; expected answers fixed before requests; no retrieval or email sending",
+  "results": [
+    {
+      "name": "Matter only in body; paraphrased category",
+      "subject": "A quick favour",
+      "body": "Could you send me the written record of what was said at the hearing for M12451? I need the text, not the audio.",
+      "expected": {
+        "intent": "REQUEST",
+        "matter": "M12451",
+        "category": "TRANSCRIPTS"
+      },
+      "candidates": [
+        "M12451"
+      ],
+      "output": {
+        "intent": "REQUEST",
+        "matter": "M12451",
+        "category": "TRANSCRIPTS"
+      },
+      "match": true,
+      "elapsedMs": 201,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 842,
+        "output_tokens": 162
+      },
+      "answers": {
+        "intent": {
+          "choice": "REQUEST",
+          "confidence": 1,
+          "selectedProbability": 1,
+          "probabilities": {
+            "REQUEST": 1,
+            "NO_REQUEST": 0
+          }
+        },
+        "matter": {
+          "choice": "M12451",
+          "confidence": 1,
+          "selectedProbability": 1,
+          "probabilities": {
+            "M12451": 1,
+            "NONE": 0,
+            "AMBIGUOUS": 0
+          }
+        },
+        "category": {
+          "choice": "TRANSCRIPTS",
+          "confidence": 1,
+          "selectedProbability": 1,
+          "probabilities": {
+            "EXHIBITS": 0,
+            "KEY_DOCUMENTS": 0,
+            "OTHER_DOCUMENTS": 0,
+            "TRANSCRIPTS": 1,
+            "RECORDINGS": 0,
+            "NONE": 0,
+            "AMBIGUOUS": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "Outdated subject; explicit correction in body",
+      "subject": "Re: M12383 exhibits",
+      "body": "Correction to my earlier email: this request is for M12205, not M12383. Please send the correspondence and administrative filings for M12205 rather than the exhibits.",
+      "expected": {
+        "intent": "REQUEST",
+        "matter": "M12205",
+        "category": "OTHER_DOCUMENTS"
+      },
+      "candidates": [
+        "M12383",
+        "M12205"
+      ],
+      "output": {
+        "intent": "REQUEST",
+        "matter": "M12205",
+        "category": "OTHER_DOCUMENTS"
+      },
+      "match": true,
+      "elapsedMs": 226,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 900,
+        "output_tokens": 174
+      },
+      "answers": {
+        "intent": {
+          "choice": "REQUEST",
+          "confidence": 0.98,
+          "selectedProbability": 0.99,
+          "probabilities": {
+            "REQUEST": 0.99,
+            "NO_REQUEST": 0.01
+          }
+        },
+        "matter": {
+          "choice": "M12205",
+          "confidence": 1,
+          "selectedProbability": 1,
+          "probabilities": {
+            "M12383": 0,
+            "M12205": 1,
+            "NONE": 0,
+            "AMBIGUOUS": 0
+          }
+        },
+        "category": {
+          "choice": "OTHER_DOCUMENTS",
+          "confidence": 0.98,
+          "selectedProbability": 0.98,
+          "probabilities": {
+            "EXHIBITS": 0,
+            "KEY_DOCUMENTS": 0,
+            "OTHER_DOCUMENTS": 0.98,
+            "TRANSCRIPTS": 0,
+            "RECORDINGS": 0,
+            "NONE": 0,
+            "AMBIGUOUS": 0.02
+          }
+        }
+      }
+    },
+    {
+      "name": "Several references; one current request",
+      "subject": "Following up on our research",
+      "body": "The examples from M12205 were useful, and we may look at M12451 next month. For now, please get the hearing audio for M12383. I do not need the written transcripts.",
+      "expected": {
+        "intent": "REQUEST",
+        "matter": "M12383",
+        "category": "RECORDINGS"
+      },
+      "candidates": [
+        "M12205",
+        "M12451",
+        "M12383"
+      ],
+      "output": {
+        "intent": "REQUEST",
+        "matter": "M12383",
+        "category": "RECORDINGS"
+      },
+      "match": true,
+      "elapsedMs": 161,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 941,
+        "output_tokens": 185
+      },
+      "answers": {
+        "intent": {
+          "choice": "REQUEST",
+          "confidence": 1,
+          "selectedProbability": 1,
+          "probabilities": {
+            "REQUEST": 1,
+            "NO_REQUEST": 0
+          }
+        },
+        "matter": {
+          "choice": "M12383",
+          "confidence": 1,
+          "selectedProbability": 1,
+          "probabilities": {
+            "M12205": 0,
+            "M12451": 0,
+            "M12383": 1,
+            "NONE": 0,
+            "AMBIGUOUS": 0
+          }
+        },
+        "category": {
+          "choice": "RECORDINGS",
+          "confidence": 1,
+          "selectedProbability": 1,
+          "probabilities": {
+            "EXHIBITS": 0,
+            "KEY_DOCUMENTS": 0,
+            "OTHER_DOCUMENTS": 0,
+            "TRANSCRIPTS": 0,
+            "RECORDINGS": 1,
+            "NONE": 0,
+            "AMBIGUOUS": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "Genuine unresolved ambiguity",
+      "subject": "Please send the files",
+      "body": "I cannot remember whether the matter is M12205 or M12383. Could you send its exhibits? I am not asking for both matters; I need help figuring out which one I meant.",
+      "expected": {
+        "intent": "REQUEST",
+        "matter": "AMBIGUOUS",
+        "category": "EXHIBITS"
+      },
+      "candidates": [
+        "M12205",
+        "M12383"
+      ],
+      "output": {
+        "intent": "REQUEST",
+        "matter": "AMBIGUOUS",
+        "category": "EXHIBITS"
+      },
+      "match": true,
+      "elapsedMs": 196,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 896,
+        "output_tokens": 171
+      },
+      "answers": {
+        "intent": {
+          "choice": "REQUEST",
+          "confidence": 0.94,
+          "selectedProbability": 0.97,
+          "probabilities": {
+            "REQUEST": 0.97,
+            "NO_REQUEST": 0.03
+          }
+        },
+        "matter": {
+          "choice": "AMBIGUOUS",
+          "confidence": 1,
+          "selectedProbability": 1,
+          "probabilities": {
+            "M12205": 0,
+            "M12383": 0,
+            "NONE": 0,
+            "AMBIGUOUS": 1
+          }
+        },
+        "category": {
+          "choice": "EXHIBITS",
+          "confidence": 0.93,
+          "selectedProbability": 0.9400000000000001,
+          "probabilities": {
+            "EXHIBITS": 0.9400000000000001,
+            "KEY_DOCUMENTS": 0,
+            "OTHER_DOCUMENTS": 0,
+            "TRANSCRIPTS": 0,
+            "RECORDINGS": 0,
+            "NONE": 0,
+            "AMBIGUOUS": 0.06
+          }
+        }
+      }
+    }
+  ]
+}

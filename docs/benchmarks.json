@@ -1,0 +1,4668 @@
+{
+  "purpose": "Feasibility and efficiency research for the take-home; retrieval and ZIP verified, email integration not implemented",
+  "methodology": {
+    "source": "https://uarb.novascotia.ca/fmi/webd/UARB15",
+    "browser": "Google Chrome via Playwright; available computer-use Chrome connector returned unavailable",
+    "benchmark": "Two runs per initial configuration in reversed order, plus two follow-up runs overlapping extra HTTP-worker initialization; tests run sequentially without competing test downloads; fresh cookie jar and browser process where applicable; same ten M12205 Other Documents; SHA-256 and filenames checked against a common reference",
+    "timingIncludes": "Session or Chrome initialization, initializing 1 or 3 independent UI states, search, category enumeration, export requests, complete disk writes, SHA-256 checks, closing download dialogs",
+    "timingExcludes": "Browser shutdown, ZIP creation, email sending, implementation/research time",
+    "caveats": [
+      "Small exploratory benchmark, not a statistical performance guarantee",
+      "Fresh client sessions; server-side cache state is uncontrolled",
+      "Final replay uses state-based polling rather than the earlier fixed 180ms delay",
+      "Parallel DOM baseline still timed out after adding stable document IDs and waiting for dialog closure; its failed runs are excluded from speed comparisons, and retained in the raw results"
+    ]
+  },
+  "benchmarkSummary": [
+    {
+      "mode": "dom",
+      "workers": 1,
+      "parallelInitialization": false,
+      "validRuns": 2,
+      "meanSeconds": 8.663,
+      "minSeconds": 8.473,
+      "maxSeconds": 8.853,
+      "meanDownloadPhaseSeconds": 4.205500000000001,
+      "meanBootstrapSeconds": 3.1925,
+      "speedupVsDom1": 1.0,
+      "timeReductionVsDom1Percent": 0.0
+    },
+    {
+      "mode": "rpc",
+      "workers": 1,
+      "parallelInitialization": false,
+      "validRuns": 2,
+      "meanSeconds": 9.567,
+      "minSeconds": 9.373,
+      "maxSeconds": 9.761,
+      "meanDownloadPhaseSeconds": 4.5485,
+      "meanBootstrapSeconds": 3.856,
+      "speedupVsDom1": 0.9055085188669384,
+      "timeReductionVsDom1Percent": -10.435184116356911
+    },
+    {
+      "mode": "rpc",
+      "workers": 3,
+      "parallelInitialization": false,
+      "validRuns": 2,
+      "meanSeconds": 12.571,
+      "minSeconds": 11.782,
+      "maxSeconds": 13.36,
+      "meanDownloadPhaseSeconds": 2.2685,
+      "meanBootstrapSeconds": 9.006,
+      "speedupVsDom1": 0.6891257656511017,
+      "timeReductionVsDom1Percent": -45.11139328177305
+    },
+    {
+      "mode": "http",
+      "workers": 1,
+      "parallelInitialization": false,
+      "validRuns": 2,
+      "meanSeconds": 8.4915,
+      "minSeconds": 6.733,
+      "maxSeconds": 10.25,
+      "meanDownloadPhaseSeconds": 4.7285,
+      "meanBootstrapSeconds": 1.936,
+      "speedupVsDom1": 1.0201966672554907,
+      "timeReductionVsDom1Percent": 1.9796837123398303
+    },
+    {
+      "mode": "http",
+      "workers": 3,
+      "parallelInitialization": false,
+      "validRuns": 2,
+      "meanSeconds": 10.042000000000002,
+      "minSeconds": 9.444,
+      "maxSeconds": 10.64,
+      "meanDownloadPhaseSeconds": 2.331,
+      "meanBootstrapSeconds": 6.4125,
+      "speedupVsDom1": 0.8626767576180042,
+      "timeReductionVsDom1Percent": -15.918273115548898
+    }
+  ],
+  "failedBenchmarkRuns": [
+    "final-4-dom3",
+    "final-9-dom3",
+    "final-13-http3-parallel-init",
+    "final-14-http3-parallel-init"
+  ],
+  "finalBenchmarkRuns": [
+    {
+      "label": "final-1-dom1",
+      "mode": "dom",
+      "workers": 1,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:12:50.351Z",
+      "files": [
+        {
+          "filename": "104160.pdf",
+          "bytes": 450576,
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 132,
+          "exportReadyMs": 4854,
+          "transferEndMs": 4986,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 4735,
+          "itemEndMs": 5087
+        },
+        {
+          "filename": "102674.pdf",
+          "bytes": 170571,
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 110,
+          "exportReadyMs": 5182,
+          "transferEndMs": 5292,
+          "row": 2,
+          "worker": 0,
+          "itemStartMs": 5087,
+          "itemEndMs": 5421
+        },
+        {
+          "filename": "102454.pdf",
+          "bytes": 166431,
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 104,
+          "exportReadyMs": 5517,
+          "transferEndMs": 5621,
+          "row": 3,
+          "worker": 0,
+          "itemStartMs": 5421,
+          "itemEndMs": 5716
+        },
+        {
+          "filename": "102417.pdf",
+          "bytes": 149993,
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 110,
+          "exportReadyMs": 5814,
+          "transferEndMs": 5924,
+          "row": 4,
+          "worker": 0,
+          "itemStartMs": 5716,
+          "itemEndMs": 6016
+        },
+        {
+          "filename": "102329.pdf",
+          "bytes": 357757,
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 131,
+          "exportReadyMs": 6115,
+          "transferEndMs": 6246,
+          "row": 5,
+          "worker": 0,
+          "itemStartMs": 6017,
+          "itemEndMs": 6349
+        },
+        {
+          "filename": "102330.pdf",
+          "bytes": 357757,
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 132,
+          "exportReadyMs": 6448,
+          "transferEndMs": 6580,
+          "row": 6,
+          "worker": 0,
+          "itemStartMs": 6349,
+          "itemEndMs": 6689
+        },
+        {
+          "filename": "102293.pdf",
+          "bytes": 281226,
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 166,
+          "exportReadyMs": 6782,
+          "transferEndMs": 6948,
+          "row": 7,
+          "worker": 0,
+          "itemStartMs": 6690,
+          "itemEndMs": 7058
+        },
+        {
+          "filename": "102295.pdf",
+          "bytes": 707388,
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 145,
+          "exportReadyMs": 7164,
+          "transferEndMs": 7309,
+          "row": 8,
+          "worker": 0,
+          "itemStartMs": 7062,
+          "itemEndMs": 7420
+        },
+        {
+          "filename": "102266.pdf",
+          "bytes": 284667,
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 164,
+          "exportReadyMs": 7513,
+          "transferEndMs": 7677,
+          "row": 9,
+          "worker": 0,
+          "itemStartMs": 7420,
+          "itemEndMs": 7783
+        },
+        {
+          "filename": "102197.pdf",
+          "bytes": 4083574,
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 868,
+          "exportReadyMs": 7880,
+          "transferEndMs": 8748,
+          "row": 10,
+          "worker": 0,
+          "itemStartMs": 7784,
+          "itemEndMs": 8853
+        }
+      ],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 347,
+        "bootstrapCompleteMs": 3471,
+        "searchAndCategoryCompleteMs": 4735
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 10,
+      "success": true,
+      "elapsedMs": 8853,
+      "totalBytes": 7009940,
+      "rpcCalls": 0,
+      "referenceHashValidation": true
+    },
+    {
+      "label": "final-2-http1",
+      "mode": "http",
+      "workers": 1,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:12:59.489Z",
+      "files": [
+        {
+          "filename": "104160.pdf",
+          "status": 200,
+          "bytes": 450576,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 319,
+          "exportReadyMs": 2723,
+          "transferEndMs": 3042,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 2625,
+          "itemEndMs": 3136
+        },
+        {
+          "filename": "102674.pdf",
+          "status": 200,
+          "bytes": 170571,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 80,
+          "exportReadyMs": 3237,
+          "transferEndMs": 3317,
+          "row": 2,
+          "worker": 0,
+          "itemStartMs": 3137,
+          "itemEndMs": 3413
+        },
+        {
+          "filename": "102454.pdf",
+          "status": 200,
+          "bytes": 166431,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 74,
+          "exportReadyMs": 3581,
+          "transferEndMs": 3655,
+          "row": 3,
+          "worker": 0,
+          "itemStartMs": 3414,
+          "itemEndMs": 3747
+        },
+        {
+          "filename": "102417.pdf",
+          "status": 200,
+          "bytes": 149993,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 68,
+          "exportReadyMs": 3912,
+          "transferEndMs": 3980,
+          "row": 4,
+          "worker": 0,
+          "itemStartMs": 3748,
+          "itemEndMs": 4079
+        },
+        {
+          "filename": "102329.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 95,
+          "exportReadyMs": 4183,
+          "transferEndMs": 4278,
+          "row": 5,
+          "worker": 0,
+          "itemStartMs": 4079,
+          "itemEndMs": 4372
+        },
+        {
+          "filename": "102330.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 96,
+          "exportReadyMs": 4476,
+          "transferEndMs": 4573,
+          "row": 6,
+          "worker": 0,
+          "itemStartMs": 4372,
+          "itemEndMs": 4672
+        },
+        {
+          "filename": "102293.pdf",
+          "status": 200,
+          "bytes": 281226,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 130,
+          "exportReadyMs": 4772,
+          "transferEndMs": 4902,
+          "row": 7,
+          "worker": 0,
+          "itemStartMs": 4673,
+          "itemEndMs": 5000
+        },
+        {
+          "filename": "102295.pdf",
+          "status": 200,
+          "bytes": 707388,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 111,
+          "exportReadyMs": 5098,
+          "transferEndMs": 5209,
+          "row": 8,
+          "worker": 0,
+          "itemStartMs": 5001,
+          "itemEndMs": 5305
+        },
+        {
+          "filename": "102266.pdf",
+          "status": 200,
+          "bytes": 284667,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 126,
+          "exportReadyMs": 5446,
+          "transferEndMs": 5572,
+          "row": 9,
+          "worker": 0,
+          "itemStartMs": 5305,
+          "itemEndMs": 5726
+        },
+        {
+          "filename": "102197.pdf",
+          "status": 200,
+          "bytes": 4083574,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 812,
+          "exportReadyMs": 5828,
+          "transferEndMs": 6640,
+          "row": 10,
+          "worker": 0,
+          "itemStartMs": 5726,
+          "itemEndMs": 6732
+        }
+      ],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 5,
+        "bootstrapCompleteMs": 1747,
+        "searchAndCategoryCompleteMs": 2625
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 10,
+      "success": true,
+      "elapsedMs": 6733,
+      "totalBytes": 7009940,
+      "rpcCalls": 69,
+      "referenceHashValidation": true
+    },
+    {
+      "label": "final-3-rpc1",
+      "mode": "rpc",
+      "workers": 1,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:13:06.408Z",
+      "files": [
+        {
+          "filename": "104160.pdf",
+          "status": 200,
+          "bytes": 450576,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 337,
+          "exportReadyMs": 5293,
+          "transferEndMs": 5630,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 5191,
+          "itemEndMs": 5730
+        },
+        {
+          "filename": "102674.pdf",
+          "status": 200,
+          "bytes": 170571,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 86,
+          "exportReadyMs": 5924,
+          "transferEndMs": 6010,
+          "row": 2,
+          "worker": 0,
+          "itemStartMs": 5731,
+          "itemEndMs": 6122
+        },
+        {
+          "filename": "102454.pdf",
+          "status": 200,
+          "bytes": 166431,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 84,
+          "exportReadyMs": 6234,
+          "transferEndMs": 6318,
+          "row": 3,
+          "worker": 0,
+          "itemStartMs": 6122,
+          "itemEndMs": 6419
+        },
+        {
+          "filename": "102417.pdf",
+          "status": 200,
+          "bytes": 149993,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 83,
+          "exportReadyMs": 6528,
+          "transferEndMs": 6611,
+          "row": 4,
+          "worker": 0,
+          "itemStartMs": 6419,
+          "itemEndMs": 6712
+        },
+        {
+          "filename": "102329.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 102,
+          "exportReadyMs": 6893,
+          "transferEndMs": 6995,
+          "row": 5,
+          "worker": 0,
+          "itemStartMs": 6713,
+          "itemEndMs": 7096
+        },
+        {
+          "filename": "102330.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 112,
+          "exportReadyMs": 7210,
+          "transferEndMs": 7323,
+          "row": 6,
+          "worker": 0,
+          "itemStartMs": 7097,
+          "itemEndMs": 7420
+        },
+        {
+          "filename": "102293.pdf",
+          "status": 200,
+          "bytes": 281226,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 145,
+          "exportReadyMs": 7777,
+          "transferEndMs": 7922,
+          "row": 7,
+          "worker": 0,
+          "itemStartMs": 7421,
+          "itemEndMs": 8030
+        },
+        {
+          "filename": "102295.pdf",
+          "status": 200,
+          "bytes": 707388,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 141,
+          "exportReadyMs": 8138,
+          "transferEndMs": 8279,
+          "row": 8,
+          "worker": 0,
+          "itemStartMs": 8031,
+          "itemEndMs": 8381
+        },
+        {
+          "filename": "102266.pdf",
+          "status": 200,
+          "bytes": 284667,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 126,
+          "exportReadyMs": 8485,
+          "transferEndMs": 8611,
+          "row": 9,
+          "worker": 0,
+          "itemStartMs": 8382,
+          "itemEndMs": 8710
+        },
+        {
+          "filename": "102197.pdf",
+          "status": 200,
+          "bytes": 4083574,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 838,
+          "exportReadyMs": 8813,
+          "transferEndMs": 9651,
+          "row": 10,
+          "worker": 0,
+          "itemStartMs": 8711,
+          "itemEndMs": 9760
+        }
+      ],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 257,
+        "bootstrapCompleteMs": 3917,
+        "searchAndCategoryCompleteMs": 5190
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 10,
+      "success": true,
+      "elapsedMs": 9761,
+      "totalBytes": 7009940,
+      "rpcCalls": 62,
+      "referenceHashValidation": true
+    },
+    {
+      "label": "final-4-dom3",
+      "mode": "dom",
+      "workers": 3,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:13:16.425Z",
+      "files": [
+        {
+          "filename": "102674.pdf",
+          "bytes": 170571,
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 274,
+          "exportReadyMs": 7308,
+          "transferEndMs": 7582,
+          "row": 2,
+          "worker": 1,
+          "itemStartMs": 7196,
+          "itemEndMs": 7665
+        },
+        {
+          "filename": "104160.pdf",
+          "bytes": 450576,
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 244,
+          "exportReadyMs": 7300,
+          "transferEndMs": 7545,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 7196,
+          "itemEndMs": 7668
+        },
+        {
+          "filename": "102454.pdf",
+          "bytes": 166431,
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 298,
+          "exportReadyMs": 7323,
+          "transferEndMs": 7621,
+          "row": 3,
+          "worker": 2,
+          "itemStartMs": 7196,
+          "itemEndMs": 7703
+        },
+        {
+          "filename": "102330.pdf",
+          "bytes": 357757,
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 148,
+          "exportReadyMs": 7875,
+          "transferEndMs": 8023,
+          "row": 6,
+          "worker": 2,
+          "itemStartMs": 7704,
+          "itemEndMs": 8140
+        },
+        {
+          "filename": "102293.pdf",
+          "bytes": 281226,
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 152,
+          "exportReadyMs": 8278,
+          "transferEndMs": 8430,
+          "row": 7,
+          "worker": 2,
+          "itemStartMs": 8140,
+          "itemEndMs": 8536
+        },
+        {
+          "filename": "102295.pdf",
+          "bytes": 707388,
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 142,
+          "exportReadyMs": 8631,
+          "transferEndMs": 8773,
+          "row": 8,
+          "worker": 2,
+          "itemStartMs": 8536,
+          "itemEndMs": 8873
+        },
+        {
+          "filename": "102266.pdf",
+          "bytes": 284667,
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 160,
+          "exportReadyMs": 8965,
+          "transferEndMs": 9125,
+          "row": 9,
+          "worker": 2,
+          "itemStartMs": 8874,
+          "itemEndMs": 9233
+        },
+        {
+          "filename": "102197.pdf",
+          "bytes": 4083574,
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 869,
+          "exportReadyMs": 9332,
+          "transferEndMs": 10201,
+          "row": 10,
+          "worker": 2,
+          "itemStartMs": 9234,
+          "itemEndMs": 10300
+        }
+      ],
+      "failures": [
+        {
+          "row": 4,
+          "worker": 1,
+          "error": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /^102417\\./ }) to be visible\u001b[22m\n"
+        },
+        {
+          "row": 5,
+          "worker": 0,
+          "error": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /^102329\\./ }) to be visible\u001b[22m\n"
+        }
+      ],
+      "stages": {
+        "browserLaunchMs": 201,
+        "bootstrapCompleteMs": 5853,
+        "searchAndCategoryCompleteMs": 7196
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 8,
+      "success": false,
+      "elapsedMs": 27742,
+      "totalBytes": 6502190,
+      "rpcCalls": 0,
+      "referenceHashValidation": false
+    },
+    {
+      "label": "final-5-rpc3",
+      "mode": "rpc",
+      "workers": 3,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:13:44.725Z",
+      "files": [
+        {
+          "filename": "102674.pdf",
+          "status": 200,
+          "bytes": 170571,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 315,
+          "exportReadyMs": 11200,
+          "transferEndMs": 11515,
+          "row": 2,
+          "worker": 1,
+          "itemStartMs": 11094,
+          "itemEndMs": 11610
+        },
+        {
+          "filename": "102454.pdf",
+          "status": 200,
+          "bytes": 166431,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 318,
+          "exportReadyMs": 11220,
+          "transferEndMs": 11538,
+          "row": 3,
+          "worker": 2,
+          "itemStartMs": 11096,
+          "itemEndMs": 11642
+        },
+        {
+          "filename": "104160.pdf",
+          "status": 200,
+          "bytes": 450576,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 355,
+          "exportReadyMs": 11248,
+          "transferEndMs": 11603,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 11091,
+          "itemEndMs": 11710
+        },
+        {
+          "filename": "102417.pdf",
+          "status": 200,
+          "bytes": 149993,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 70,
+          "exportReadyMs": 11761,
+          "transferEndMs": 11831,
+          "row": 4,
+          "worker": 1,
+          "itemStartMs": 11611,
+          "itemEndMs": 11949
+        },
+        {
+          "filename": "102329.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 119,
+          "exportReadyMs": 11784,
+          "transferEndMs": 11903,
+          "row": 5,
+          "worker": 2,
+          "itemStartMs": 11642,
+          "itemEndMs": 12037
+        },
+        {
+          "filename": "102330.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 126,
+          "exportReadyMs": 11889,
+          "transferEndMs": 12015,
+          "row": 6,
+          "worker": 0,
+          "itemStartMs": 11711,
+          "itemEndMs": 12127
+        },
+        {
+          "filename": "102293.pdf",
+          "status": 200,
+          "bytes": 281226,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 144,
+          "exportReadyMs": 12061,
+          "transferEndMs": 12205,
+          "row": 7,
+          "worker": 1,
+          "itemStartMs": 11950,
+          "itemEndMs": 12341
+        },
+        {
+          "filename": "102295.pdf",
+          "status": 200,
+          "bytes": 707388,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 116,
+          "exportReadyMs": 12179,
+          "transferEndMs": 12295,
+          "row": 8,
+          "worker": 2,
+          "itemStartMs": 12038,
+          "itemEndMs": 12412
+        },
+        {
+          "filename": "102266.pdf",
+          "status": 200,
+          "bytes": 284667,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 122,
+          "exportReadyMs": 12241,
+          "transferEndMs": 12363,
+          "row": 9,
+          "worker": 0,
+          "itemStartMs": 12128,
+          "itemEndMs": 12469
+        },
+        {
+          "filename": "102197.pdf",
+          "status": 200,
+          "bytes": 4083574,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 815,
+          "exportReadyMs": 12442,
+          "transferEndMs": 13257,
+          "row": 10,
+          "worker": 1,
+          "itemStartMs": 12342,
+          "itemEndMs": 13358
+        }
+      ],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 287,
+        "bootstrapCompleteMs": 9711,
+        "searchAndCategoryCompleteMs": 11091
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 10,
+      "success": true,
+      "elapsedMs": 13360,
+      "totalBytes": 7009940,
+      "rpcCalls": 92,
+      "referenceHashValidation": true
+    },
+    {
+      "label": "final-6-http3",
+      "mode": "http",
+      "workers": 3,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:13:58.366Z",
+      "files": [
+        {
+          "filename": "102674.pdf",
+          "status": 200,
+          "bytes": 170571,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 221,
+          "exportReadyMs": 7368,
+          "transferEndMs": 7589,
+          "row": 2,
+          "worker": 1,
+          "itemStartMs": 7217,
+          "itemEndMs": 7725
+        },
+        {
+          "filename": "102454.pdf",
+          "status": 200,
+          "bytes": 166431,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 293,
+          "exportReadyMs": 7323,
+          "transferEndMs": 7616,
+          "row": 3,
+          "worker": 2,
+          "itemStartMs": 7219,
+          "itemEndMs": 7746
+        },
+        {
+          "filename": "104160.pdf",
+          "status": 200,
+          "bytes": 450576,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 432,
+          "exportReadyMs": 7344,
+          "transferEndMs": 7776,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 7212,
+          "itemEndMs": 7897
+        },
+        {
+          "filename": "102417.pdf",
+          "status": 200,
+          "bytes": 149993,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 99,
+          "exportReadyMs": 7831,
+          "transferEndMs": 7930,
+          "row": 4,
+          "worker": 1,
+          "itemStartMs": 7726,
+          "itemEndMs": 8025
+        },
+        {
+          "filename": "102329.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 103,
+          "exportReadyMs": 7876,
+          "transferEndMs": 7979,
+          "row": 5,
+          "worker": 2,
+          "itemStartMs": 7746,
+          "itemEndMs": 8088
+        },
+        {
+          "filename": "102330.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 110,
+          "exportReadyMs": 8071,
+          "transferEndMs": 8181,
+          "row": 6,
+          "worker": 0,
+          "itemStartMs": 7897,
+          "itemEndMs": 8317
+        },
+        {
+          "filename": "102293.pdf",
+          "status": 200,
+          "bytes": 281226,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 143,
+          "exportReadyMs": 8165,
+          "transferEndMs": 8308,
+          "row": 7,
+          "worker": 1,
+          "itemStartMs": 8026,
+          "itemEndMs": 8412
+        },
+        {
+          "filename": "102295.pdf",
+          "status": 200,
+          "bytes": 707388,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 100,
+          "exportReadyMs": 8222,
+          "transferEndMs": 8322,
+          "row": 8,
+          "worker": 2,
+          "itemStartMs": 8089,
+          "itemEndMs": 8440
+        },
+        {
+          "filename": "102266.pdf",
+          "status": 200,
+          "bytes": 284667,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 134,
+          "exportReadyMs": 8469,
+          "transferEndMs": 8603,
+          "row": 9,
+          "worker": 0,
+          "itemStartMs": 8318,
+          "itemEndMs": 8702
+        },
+        {
+          "filename": "102197.pdf",
+          "status": 200,
+          "bytes": 4083574,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 822,
+          "exportReadyMs": 8524,
+          "transferEndMs": 9346,
+          "row": 10,
+          "worker": 1,
+          "itemStartMs": 8413,
+          "itemEndMs": 9443
+        }
+      ],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 5,
+        "bootstrapCompleteMs": 6129,
+        "searchAndCategoryCompleteMs": 7211
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 10,
+      "success": true,
+      "elapsedMs": 9444,
+      "totalBytes": 7009940,
+      "rpcCalls": 123,
+      "referenceHashValidation": true
+    },
+    {
+      "label": "final-7-http3",
+      "mode": "http",
+      "workers": 3,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:14:08.011Z",
+      "files": [
+        {
+          "filename": "102674.pdf",
+          "status": 200,
+          "bytes": 170571,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 252,
+          "exportReadyMs": 8391,
+          "transferEndMs": 8643,
+          "row": 2,
+          "worker": 1,
+          "itemStartMs": 8216,
+          "itemEndMs": 8754
+        },
+        {
+          "filename": "102454.pdf",
+          "status": 200,
+          "bytes": 166431,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 247,
+          "exportReadyMs": 8472,
+          "transferEndMs": 8719,
+          "row": 3,
+          "worker": 2,
+          "itemStartMs": 8219,
+          "itemEndMs": 8826
+        },
+        {
+          "filename": "104160.pdf",
+          "status": 200,
+          "bytes": 450576,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 346,
+          "exportReadyMs": 8485,
+          "transferEndMs": 8831,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 8212,
+          "itemEndMs": 8970
+        },
+        {
+          "filename": "102417.pdf",
+          "status": 200,
+          "bytes": 149993,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 93,
+          "exportReadyMs": 8858,
+          "transferEndMs": 8951,
+          "row": 4,
+          "worker": 1,
+          "itemStartMs": 8754,
+          "itemEndMs": 9115
+        },
+        {
+          "filename": "102329.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 131,
+          "exportReadyMs": 8930,
+          "transferEndMs": 9061,
+          "row": 5,
+          "worker": 2,
+          "itemStartMs": 8826,
+          "itemEndMs": 9198
+        },
+        {
+          "filename": "102330.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 127,
+          "exportReadyMs": 9217,
+          "transferEndMs": 9344,
+          "row": 6,
+          "worker": 0,
+          "itemStartMs": 8971,
+          "itemEndMs": 9544
+        },
+        {
+          "filename": "102295.pdf",
+          "status": 200,
+          "bytes": 707388,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 156,
+          "exportReadyMs": 9341,
+          "transferEndMs": 9497,
+          "row": 8,
+          "worker": 2,
+          "itemStartMs": 9199,
+          "itemEndMs": 9600
+        },
+        {
+          "filename": "102293.pdf",
+          "status": 200,
+          "bytes": 281226,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 155,
+          "exportReadyMs": 9332,
+          "transferEndMs": 9487,
+          "row": 7,
+          "worker": 1,
+          "itemStartMs": 9115,
+          "itemEndMs": 9621
+        },
+        {
+          "filename": "102266.pdf",
+          "status": 200,
+          "bytes": 284667,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 123,
+          "exportReadyMs": 9681,
+          "transferEndMs": 9804,
+          "row": 9,
+          "worker": 0,
+          "itemStartMs": 9545,
+          "itemEndMs": 9919
+        },
+        {
+          "filename": "102197.pdf",
+          "status": 200,
+          "bytes": 4083574,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 835,
+          "exportReadyMs": 9707,
+          "transferEndMs": 10542,
+          "row": 10,
+          "worker": 2,
+          "itemStartMs": 9601,
+          "itemEndMs": 10639
+        }
+      ],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 5,
+        "bootstrapCompleteMs": 6696,
+        "searchAndCategoryCompleteMs": 8211
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 10,
+      "success": true,
+      "elapsedMs": 10640,
+      "totalBytes": 7009940,
+      "rpcCalls": 134,
+      "referenceHashValidation": true
+    },
+    {
+      "label": "final-8-rpc3",
+      "mode": "rpc",
+      "workers": 3,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:14:18.855Z",
+      "files": [
+        {
+          "filename": "102454.pdf",
+          "status": 200,
+          "bytes": 166431,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 224,
+          "exportReadyMs": 9630,
+          "transferEndMs": 9855,
+          "row": 3,
+          "worker": 2,
+          "itemStartMs": 9524,
+          "itemEndMs": 9950
+        },
+        {
+          "filename": "104160.pdf",
+          "status": 200,
+          "bytes": 450576,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 279,
+          "exportReadyMs": 9677,
+          "transferEndMs": 9956,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 9515,
+          "itemEndMs": 10070
+        },
+        {
+          "filename": "102674.pdf",
+          "status": 200,
+          "bytes": 170571,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 309,
+          "exportReadyMs": 9684,
+          "transferEndMs": 9993,
+          "row": 2,
+          "worker": 1,
+          "itemStartMs": 9520,
+          "itemEndMs": 10148
+        },
+        {
+          "filename": "102417.pdf",
+          "status": 200,
+          "bytes": 149993,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 75,
+          "exportReadyMs": 10051,
+          "transferEndMs": 10126,
+          "row": 4,
+          "worker": 2,
+          "itemStartMs": 9951,
+          "itemEndMs": 10228
+        },
+        {
+          "filename": "102329.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 112,
+          "exportReadyMs": 10206,
+          "transferEndMs": 10318,
+          "row": 5,
+          "worker": 0,
+          "itemStartMs": 10071,
+          "itemEndMs": 10556
+        },
+        {
+          "filename": "102330.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 94,
+          "exportReadyMs": 10258,
+          "transferEndMs": 10352,
+          "row": 6,
+          "worker": 1,
+          "itemStartMs": 10149,
+          "itemEndMs": 10566
+        },
+        {
+          "filename": "102293.pdf",
+          "status": 200,
+          "bytes": 281226,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 246,
+          "exportReadyMs": 10363,
+          "transferEndMs": 10609,
+          "row": 7,
+          "worker": 2,
+          "itemStartMs": 10228,
+          "itemEndMs": 10716
+        },
+        {
+          "filename": "102295.pdf",
+          "status": 200,
+          "bytes": 707388,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 118,
+          "exportReadyMs": 10662,
+          "transferEndMs": 10780,
+          "row": 8,
+          "worker": 0,
+          "itemStartMs": 10557,
+          "itemEndMs": 10900
+        },
+        {
+          "filename": "102266.pdf",
+          "status": 200,
+          "bytes": 284667,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 156,
+          "exportReadyMs": 10686,
+          "transferEndMs": 10842,
+          "row": 9,
+          "worker": 1,
+          "itemStartMs": 10566,
+          "itemEndMs": 10988
+        },
+        {
+          "filename": "102197.pdf",
+          "status": 200,
+          "bytes": 4083574,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 841,
+          "exportReadyMs": 10839,
+          "transferEndMs": 11680,
+          "row": 10,
+          "worker": 2,
+          "itemStartMs": 10717,
+          "itemEndMs": 11781
+        }
+      ],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 363,
+        "bootstrapCompleteMs": 8301,
+        "searchAndCategoryCompleteMs": 9514
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 10,
+      "success": true,
+      "elapsedMs": 11782,
+      "totalBytes": 7009940,
+      "rpcCalls": 92,
+      "referenceHashValidation": true
+    },
+    {
+      "label": "final-9-dom3",
+      "mode": "dom",
+      "workers": 3,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:14:30.920Z",
+      "files": [
+        {
+          "filename": "102674.pdf",
+          "bytes": 170571,
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 212,
+          "exportReadyMs": 8989,
+          "transferEndMs": 9201,
+          "row": 2,
+          "worker": 1,
+          "itemStartMs": 8861,
+          "itemEndMs": 9268
+        },
+        {
+          "filename": "102454.pdf",
+          "bytes": 166431,
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 196,
+          "exportReadyMs": 8978,
+          "transferEndMs": 9174,
+          "row": 3,
+          "worker": 2,
+          "itemStartMs": 8861,
+          "itemEndMs": 9291
+        },
+        {
+          "filename": "104160.pdf",
+          "bytes": 450576,
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 225,
+          "exportReadyMs": 8969,
+          "transferEndMs": 9194,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 8861,
+          "itemEndMs": 9293
+        },
+        {
+          "filename": "102417.pdf",
+          "bytes": 149993,
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 119,
+          "exportReadyMs": 9390,
+          "transferEndMs": 9509,
+          "row": 4,
+          "worker": 1,
+          "itemStartMs": 9268,
+          "itemEndMs": 9615
+        },
+        {
+          "filename": "102329.pdf",
+          "bytes": 357757,
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 218,
+          "exportReadyMs": 9385,
+          "transferEndMs": 9603,
+          "row": 5,
+          "worker": 2,
+          "itemStartMs": 9291,
+          "itemEndMs": 9669
+        },
+        {
+          "filename": "102330.pdf",
+          "bytes": 357757,
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 234,
+          "exportReadyMs": 9395,
+          "transferEndMs": 9629,
+          "row": 6,
+          "worker": 0,
+          "itemStartMs": 9293,
+          "itemEndMs": 9876
+        },
+        {
+          "filename": "102293.pdf",
+          "bytes": 281226,
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 208,
+          "exportReadyMs": 9845,
+          "transferEndMs": 10053,
+          "row": 7,
+          "worker": 1,
+          "itemStartMs": 9616,
+          "itemEndMs": 10295
+        },
+        {
+          "filename": "102295.pdf",
+          "bytes": 707388,
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 170,
+          "exportReadyMs": 9889,
+          "transferEndMs": 10059,
+          "row": 8,
+          "worker": 2,
+          "itemStartMs": 9671,
+          "itemEndMs": 10371
+        },
+        {
+          "filename": "102266.pdf",
+          "bytes": 284667,
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 259,
+          "exportReadyMs": 10103,
+          "transferEndMs": 10362,
+          "row": 9,
+          "worker": 0,
+          "itemStartMs": 9876,
+          "itemEndMs": 10489
+        }
+      ],
+      "failures": [
+        {
+          "row": 10,
+          "worker": 1,
+          "error": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: /^102197\\./ }) to be visible\u001b[22m\n"
+        }
+      ],
+      "stages": {
+        "browserLaunchMs": 262,
+        "bootstrapCompleteMs": 7047,
+        "searchAndCategoryCompleteMs": 8861
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 9,
+      "success": false,
+      "elapsedMs": 30331,
+      "totalBytes": 2926366,
+      "rpcCalls": 0,
+      "referenceHashValidation": false
+    },
+    {
+      "label": "final-10-rpc1",
+      "mode": "rpc",
+      "workers": 1,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:15:01.669Z",
+      "files": [
+        {
+          "filename": "104160.pdf",
+          "status": 200,
+          "bytes": 450576,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 282,
+          "exportReadyMs": 4957,
+          "transferEndMs": 5239,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 4848,
+          "itemEndMs": 5335
+        },
+        {
+          "filename": "102674.pdf",
+          "status": 200,
+          "bytes": 170571,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 82,
+          "exportReadyMs": 5572,
+          "transferEndMs": 5654,
+          "row": 2,
+          "worker": 0,
+          "itemStartMs": 5336,
+          "itemEndMs": 5754
+        },
+        {
+          "filename": "102454.pdf",
+          "status": 200,
+          "bytes": 166431,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 80,
+          "exportReadyMs": 6001,
+          "transferEndMs": 6081,
+          "row": 3,
+          "worker": 0,
+          "itemStartMs": 5755,
+          "itemEndMs": 6235
+        },
+        {
+          "filename": "102417.pdf",
+          "status": 200,
+          "bytes": 149993,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 176,
+          "exportReadyMs": 6424,
+          "transferEndMs": 6600,
+          "row": 4,
+          "worker": 0,
+          "itemStartMs": 6235,
+          "itemEndMs": 6705
+        },
+        {
+          "filename": "102329.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 96,
+          "exportReadyMs": 6809,
+          "transferEndMs": 6905,
+          "row": 5,
+          "worker": 0,
+          "itemStartMs": 6705,
+          "itemEndMs": 7033
+        },
+        {
+          "filename": "102330.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 92,
+          "exportReadyMs": 7141,
+          "transferEndMs": 7233,
+          "row": 6,
+          "worker": 0,
+          "itemStartMs": 7033,
+          "itemEndMs": 7330
+        },
+        {
+          "filename": "102293.pdf",
+          "status": 200,
+          "bytes": 281226,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 173,
+          "exportReadyMs": 7439,
+          "transferEndMs": 7612,
+          "row": 7,
+          "worker": 0,
+          "itemStartMs": 7331,
+          "itemEndMs": 7708
+        },
+        {
+          "filename": "102295.pdf",
+          "status": 200,
+          "bytes": 707388,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 99,
+          "exportReadyMs": 7806,
+          "transferEndMs": 7905,
+          "row": 8,
+          "worker": 0,
+          "itemStartMs": 7709,
+          "itemEndMs": 8002
+        },
+        {
+          "filename": "102266.pdf",
+          "status": 200,
+          "bytes": 284667,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 124,
+          "exportReadyMs": 8101,
+          "transferEndMs": 8225,
+          "row": 9,
+          "worker": 0,
+          "itemStartMs": 8003,
+          "itemEndMs": 8328
+        },
+        {
+          "filename": "102197.pdf",
+          "status": 200,
+          "bytes": 4083574,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 843,
+          "exportReadyMs": 8437,
+          "transferEndMs": 9280,
+          "row": 10,
+          "worker": 0,
+          "itemStartMs": 8329,
+          "itemEndMs": 9373
+        }
+      ],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 370,
+        "bootstrapCompleteMs": 3795,
+        "searchAndCategoryCompleteMs": 4847
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 10,
+      "success": true,
+      "elapsedMs": 9373,
+      "totalBytes": 7009940,
+      "rpcCalls": 58,
+      "referenceHashValidation": true
+    },
+    {
+      "label": "final-11-http1",
+      "mode": "http",
+      "workers": 1,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:15:11.303Z",
+      "files": [
+        {
+          "filename": "104160.pdf",
+          "status": 200,
+          "bytes": 450576,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 281,
+          "exportReadyMs": 5023,
+          "transferEndMs": 5304,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 4901,
+          "itemEndMs": 5423
+        },
+        {
+          "filename": "102674.pdf",
+          "status": 200,
+          "bytes": 170571,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 83,
+          "exportReadyMs": 5552,
+          "transferEndMs": 5635,
+          "row": 2,
+          "worker": 0,
+          "itemStartMs": 5424,
+          "itemEndMs": 5751
+        },
+        {
+          "filename": "102454.pdf",
+          "status": 200,
+          "bytes": 166431,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 71,
+          "exportReadyMs": 5866,
+          "transferEndMs": 5937,
+          "row": 3,
+          "worker": 0,
+          "itemStartMs": 5752,
+          "itemEndMs": 6151
+        },
+        {
+          "filename": "102417.pdf",
+          "status": 200,
+          "bytes": 149993,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 71,
+          "exportReadyMs": 6270,
+          "transferEndMs": 6341,
+          "row": 4,
+          "worker": 0,
+          "itemStartMs": 6151,
+          "itemEndMs": 6453
+        },
+        {
+          "filename": "102329.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 94,
+          "exportReadyMs": 6569,
+          "transferEndMs": 6663,
+          "row": 5,
+          "worker": 0,
+          "itemStartMs": 6453,
+          "itemEndMs": 6775
+        },
+        {
+          "filename": "102330.pdf",
+          "status": 200,
+          "bytes": 357757,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 227,
+          "exportReadyMs": 6985,
+          "transferEndMs": 7212,
+          "row": 6,
+          "worker": 0,
+          "itemStartMs": 6776,
+          "itemEndMs": 7350
+        },
+        {
+          "filename": "102293.pdf",
+          "status": 200,
+          "bytes": 281226,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 256,
+          "exportReadyMs": 7527,
+          "transferEndMs": 7783,
+          "row": 7,
+          "worker": 0,
+          "itemStartMs": 7351,
+          "itemEndMs": 7892
+        },
+        {
+          "filename": "102295.pdf",
+          "status": 200,
+          "bytes": 707388,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 276,
+          "exportReadyMs": 8259,
+          "transferEndMs": 8535,
+          "row": 8,
+          "worker": 0,
+          "itemStartMs": 7893,
+          "itemEndMs": 8632
+        },
+        {
+          "filename": "102266.pdf",
+          "status": 200,
+          "bytes": 284667,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 136,
+          "exportReadyMs": 8979,
+          "transferEndMs": 9115,
+          "row": 9,
+          "worker": 0,
+          "itemStartMs": 8634,
+          "itemEndMs": 9247
+        },
+        {
+          "filename": "102197.pdf",
+          "status": 200,
+          "bytes": 4083574,
+          "mime": "application/octet-stream;charset=UTF-8",
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 804,
+          "exportReadyMs": 9349,
+          "transferEndMs": 10153,
+          "row": 10,
+          "worker": 0,
+          "itemStartMs": 9248,
+          "itemEndMs": 10249
+        }
+      ],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 5,
+        "bootstrapCompleteMs": 2125,
+        "searchAndCategoryCompleteMs": 4901
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 10,
+      "success": true,
+      "elapsedMs": 10250,
+      "totalBytes": 7009940,
+      "rpcCalls": 78,
+      "referenceHashValidation": true
+    },
+    {
+      "label": "final-12-dom1",
+      "mode": "dom",
+      "workers": 1,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:15:21.735Z",
+      "files": [
+        {
+          "filename": "104160.pdf",
+          "bytes": 450576,
+          "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 125,
+          "exportReadyMs": 4297,
+          "transferEndMs": 4422,
+          "row": 1,
+          "worker": 0,
+          "itemStartMs": 4180,
+          "itemEndMs": 4529
+        },
+        {
+          "filename": "102674.pdf",
+          "bytes": 170571,
+          "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 112,
+          "exportReadyMs": 4623,
+          "transferEndMs": 4735,
+          "row": 2,
+          "worker": 0,
+          "itemStartMs": 4529,
+          "itemEndMs": 4945
+        },
+        {
+          "filename": "102454.pdf",
+          "bytes": 166431,
+          "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 88,
+          "exportReadyMs": 5042,
+          "transferEndMs": 5130,
+          "row": 3,
+          "worker": 0,
+          "itemStartMs": 4946,
+          "itemEndMs": 5229
+        },
+        {
+          "filename": "102417.pdf",
+          "bytes": 149993,
+          "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+          "signature": "255044462d312e350d25a6e9",
+          "transferMs": 103,
+          "exportReadyMs": 5325,
+          "transferEndMs": 5428,
+          "row": 4,
+          "worker": 0,
+          "itemStartMs": 5229,
+          "itemEndMs": 5526
+        },
+        {
+          "filename": "102329.pdf",
+          "bytes": 357757,
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 136,
+          "exportReadyMs": 5622,
+          "transferEndMs": 5758,
+          "row": 5,
+          "worker": 0,
+          "itemStartMs": 5526,
+          "itemEndMs": 5866
+        },
+        {
+          "filename": "102330.pdf",
+          "bytes": 357757,
+          "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+          "signature": "255044462d312e370a25fbfc",
+          "transferMs": 148,
+          "exportReadyMs": 5957,
+          "transferEndMs": 6105,
+          "row": 6,
+          "worker": 0,
+          "itemStartMs": 5866,
+          "itemEndMs": 6217
+        },
+        {
+          "filename": "102293.pdf",
+          "bytes": 281226,
+          "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 139,
+          "exportReadyMs": 6424,
+          "transferEndMs": 6563,
+          "row": 7,
+          "worker": 0,
+          "itemStartMs": 6218,
+          "itemEndMs": 6657
+        },
+        {
+          "filename": "102295.pdf",
+          "bytes": 707388,
+          "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 143,
+          "exportReadyMs": 6757,
+          "transferEndMs": 6900,
+          "row": 8,
+          "worker": 0,
+          "itemStartMs": 6658,
+          "itemEndMs": 6999
+        },
+        {
+          "filename": "102266.pdf",
+          "bytes": 284667,
+          "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+          "signature": "255044462d312e360d25e2e3",
+          "transferMs": 174,
+          "exportReadyMs": 7092,
+          "transferEndMs": 7266,
+          "row": 9,
+          "worker": 0,
+          "itemStartMs": 7000,
+          "itemEndMs": 7328
+        },
+        {
+          "filename": "102197.pdf",
+          "bytes": 4083574,
+          "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+          "signature": "255044462d312e370a0a3420",
+          "transferMs": 838,
+          "exportReadyMs": 7544,
+          "transferEndMs": 8382,
+          "row": 10,
+          "worker": 0,
+          "itemStartMs": 7329,
+          "itemEndMs": 8473
+        }
+      ],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 229,
+        "bootstrapCompleteMs": 2914,
+        "searchAndCategoryCompleteMs": 4180
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "selected": 10,
+      "rowSelection": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "uniqueFiles": 10,
+      "success": true,
+      "elapsedMs": 8473,
+      "totalBytes": 7009940,
+      "rpcCalls": 0,
+      "referenceHashValidation": true
+    },
+    {
+      "label": "final-13-http3-parallel-init",
+      "mode": "http",
+      "workers": 3,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "parallelInitialization": true,
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:16:35.714Z",
+      "files": [],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 7
+      },
+      "error": "{\"caption\":\"Communication problem\",\"url\":null,\"message\":\"Take note of any unsaved data, and <u>click here</u> to continue.\",\"details\":null}",
+      "elapsedMs": 2240,
+      "totalBytes": 0,
+      "rpcCalls": 10,
+      "referenceHashValidation": false
+    },
+    {
+      "label": "final-14-http3-parallel-init",
+      "mode": "http",
+      "workers": 3,
+      "matter": "M12205",
+      "category": "Other Documents",
+      "limit": 10,
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "parallelInitialization": true,
+      "rpcDelayMs": 0,
+      "startedAt": "2026-10-29T02:16:38.202Z",
+      "files": [],
+      "failures": [],
+      "stages": {
+        "browserLaunchMs": 5
+      },
+      "error": "{\"caption\":\"Communication problem\",\"url\":null,\"message\":\"Take note of any unsaved data, and <u>click here</u> to continue.\",\"details\":null}",
+      "elapsedMs": 3108,
+      "totalBytes": 0,
+      "rpcCalls": 12,
+      "referenceHashValidation": false
+    }
+  ],
+  "categoryTests": [
+    {
+      "category": "Other Documents",
+      "matter": "M12205",
+      "listedCount": 44,
+      "downloadedCount": 10,
+      "bytes": 7009940,
+      "bothMethodsSucceededAndMatched": true,
+      "chromeReplay": {
+        "label": "rpc3-other-initial",
+        "mode": "rpc",
+        "workers": 3,
+        "matter": "M12205",
+        "category": "Other Documents",
+        "limit": 10,
+        "viewport": {
+          "width": 1280,
+          "height": 1200
+        },
+        "startedAt": "2026-10-29T01:55:41.128Z",
+        "files": [
+          {
+            "filename": "104160.pdf",
+            "status": 200,
+            "bytes": 450576,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+            "signature": "255044462d312e370a25fbfc",
+            "transferMs": 123,
+            "exportReadyMs": 16044,
+            "transferEndMs": 16170,
+            "row": 1,
+            "worker": 0,
+            "itemStartMs": 15572,
+            "itemEndMs": 16652
+          },
+          {
+            "filename": "102674.pdf",
+            "status": 200,
+            "bytes": 170571,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 116,
+            "exportReadyMs": 16090,
+            "transferEndMs": 16206,
+            "row": 2,
+            "worker": 1,
+            "itemStartMs": 15577,
+            "itemEndMs": 16676
+          },
+          {
+            "filename": "102454.pdf",
+            "status": 200,
+            "bytes": 166431,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 167,
+            "exportReadyMs": 16087,
+            "transferEndMs": 16255,
+            "row": 3,
+            "worker": 2,
+            "itemStartMs": 15580,
+            "itemEndMs": 16710
+          },
+          {
+            "filename": "102417.pdf",
+            "status": 200,
+            "bytes": 149993,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+            "signature": "255044462d312e350d25a6e9",
+            "transferMs": 76,
+            "exportReadyMs": 17121,
+            "transferEndMs": 17197,
+            "row": 4,
+            "worker": 0,
+            "itemStartMs": 16654,
+            "itemEndMs": 17680
+          },
+          {
+            "filename": "102329.pdf",
+            "status": 200,
+            "bytes": 357757,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+            "signature": "255044462d312e370a25fbfc",
+            "transferMs": 103,
+            "exportReadyMs": 17151,
+            "transferEndMs": 17256,
+            "row": 5,
+            "worker": 1,
+            "itemStartMs": 16676,
+            "itemEndMs": 17715
+          },
+          {
+            "filename": "102330.pdf",
+            "status": 200,
+            "bytes": 357757,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+            "signature": "255044462d312e370a25fbfc",
+            "transferMs": 105,
+            "exportReadyMs": 17181,
+            "transferEndMs": 17287,
+            "row": 6,
+            "worker": 2,
+            "itemStartMs": 16711,
+            "itemEndMs": 17742
+          },
+          {
+            "filename": "102293.pdf",
+            "status": 200,
+            "bytes": 281226,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 124,
+            "exportReadyMs": 18150,
+            "transferEndMs": 18275,
+            "row": 7,
+            "worker": 0,
+            "itemStartMs": 17681,
+            "itemEndMs": 18787
+          },
+          {
+            "filename": "102295.pdf",
+            "status": 200,
+            "bytes": 707388,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+            "signature": "255044462d312e370a0a3420",
+            "transferMs": 107,
+            "exportReadyMs": 18255,
+            "transferEndMs": 18363,
+            "row": 8,
+            "worker": 1,
+            "itemStartMs": 17715,
+            "itemEndMs": 18821
+          },
+          {
+            "filename": "102266.pdf",
+            "status": 200,
+            "bytes": 284667,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 146,
+            "exportReadyMs": 18273,
+            "transferEndMs": 18420,
+            "row": 9,
+            "worker": 2,
+            "itemStartMs": 17742,
+            "itemEndMs": 18886
+          },
+          {
+            "filename": "102197.pdf",
+            "status": 200,
+            "bytes": 4083574,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+            "signature": "255044462d312e370a0a3420",
+            "transferMs": 835,
+            "exportReadyMs": 19264,
+            "transferEndMs": 20101,
+            "row": 10,
+            "worker": 0,
+            "itemStartMs": 18788,
+            "itemEndMs": 20571
+          }
+        ],
+        "failures": [],
+        "stages": {
+          "browserLaunchMs": 405,
+          "bootstrapCompleteMs": 12478,
+          "searchAndCategoryCompleteMs": 15572
+        },
+        "counts": {
+          "Exhibits": 13,
+          "Key Documents": 6,
+          "Other Documents": 44,
+          "Transcripts": 0,
+          "Recordings": 0
+        },
+        "selected": 10,
+        "rowSelection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "success": true,
+        "elapsedMs": 20572,
+        "totalBytes": 7009940,
+        "rpcCalls": 79
+      },
+      "httpOnlyReplay": {
+        "label": "http3-other-first",
+        "mode": "http",
+        "workers": 3,
+        "matter": "M12205",
+        "category": "Other Documents",
+        "limit": 10,
+        "viewport": {
+          "width": 1280,
+          "height": 1200
+        },
+        "startedAt": "2026-10-29T02:00:42.874Z",
+        "files": [
+          {
+            "filename": "102674.pdf",
+            "status": 200,
+            "bytes": 170571,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 203,
+            "exportReadyMs": 6813,
+            "transferEndMs": 7018,
+            "row": 2,
+            "worker": 1,
+            "itemStartMs": 6699,
+            "itemEndMs": 7113
+          },
+          {
+            "filename": "102454.pdf",
+            "status": 200,
+            "bytes": 166431,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "9c2832aab9dc962c7902389bffaacd842e21775efe8b5441d9aa18d3e05ad798",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 82,
+            "exportReadyMs": 6959,
+            "transferEndMs": 7042,
+            "row": 3,
+            "worker": 2,
+            "itemStartMs": 6703,
+            "itemEndMs": 7140
+          },
+          {
+            "filename": "104160.pdf",
+            "status": 200,
+            "bytes": 450576,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "b31dccc873bf764bde269db7b58876a03a64d7004a641fb3f9609fb542739a15",
+            "signature": "255044462d312e370a25fbfc",
+            "transferMs": 106,
+            "exportReadyMs": 6982,
+            "transferEndMs": 7089,
+            "row": 1,
+            "worker": 0,
+            "itemStartMs": 6696,
+            "itemEndMs": 7319
+          },
+          {
+            "filename": "102417.pdf",
+            "status": 200,
+            "bytes": 149993,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "1244ab49a3a731d94af75e5e9eef0ed8bf65f09987d3bd1668935aae16fe3d9e",
+            "signature": "255044462d312e350d25a6e9",
+            "transferMs": 74,
+            "exportReadyMs": 7227,
+            "transferEndMs": 7301,
+            "row": 4,
+            "worker": 1,
+            "itemStartMs": 7114,
+            "itemEndMs": 7398
+          },
+          {
+            "filename": "102329.pdf",
+            "status": 200,
+            "bytes": 357757,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+            "signature": "255044462d312e370a25fbfc",
+            "transferMs": 91,
+            "exportReadyMs": 7395,
+            "transferEndMs": 7488,
+            "row": 5,
+            "worker": 2,
+            "itemStartMs": 7140,
+            "itemEndMs": 7629
+          },
+          {
+            "filename": "102330.pdf",
+            "status": 200,
+            "bytes": 357757,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "c79d5718376f45d86a6277a0baacca8b6f797622f300f734b07ff2710d948c65",
+            "signature": "255044462d312e370a25fbfc",
+            "transferMs": 99,
+            "exportReadyMs": 7423,
+            "transferEndMs": 7523,
+            "row": 6,
+            "worker": 0,
+            "itemStartMs": 7319,
+            "itemEndMs": 7644
+          },
+          {
+            "filename": "102293.pdf",
+            "status": 200,
+            "bytes": 281226,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "553056c2c48e627d1443dac394c218cc3d8412a78645ca86cb525202f84b743d",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 132,
+            "exportReadyMs": 7639,
+            "transferEndMs": 7773,
+            "row": 7,
+            "worker": 1,
+            "itemStartMs": 7399,
+            "itemEndMs": 7903
+          },
+          {
+            "filename": "102295.pdf",
+            "status": 200,
+            "bytes": 707388,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "8c773e29b7580c44a3996389fa9de08270029ed56a1c34f11bec552a20ce12e3",
+            "signature": "255044462d312e370a0a3420",
+            "transferMs": 143,
+            "exportReadyMs": 7740,
+            "transferEndMs": 7883,
+            "row": 8,
+            "worker": 2,
+            "itemStartMs": 7630,
+            "itemEndMs": 7977
+          },
+          {
+            "filename": "102266.pdf",
+            "status": 200,
+            "bytes": 284667,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "373f9d93e0a7a15e6f8d1d521a6fc1215b4935358e014bf48ca1333eac05e653",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 141,
+            "exportReadyMs": 7769,
+            "transferEndMs": 7911,
+            "row": 9,
+            "worker": 0,
+            "itemStartMs": 7645,
+            "itemEndMs": 8021
+          },
+          {
+            "filename": "102197.pdf",
+            "status": 200,
+            "bytes": 4083574,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "d42573f5f9e64d462105001da4c30ebef04b0009f2f357e76c8aad3cb9ef761e",
+            "signature": "255044462d312e370a0a3420",
+            "transferMs": 814,
+            "exportReadyMs": 8004,
+            "transferEndMs": 8821,
+            "row": 10,
+            "worker": 1,
+            "itemStartMs": 7903,
+            "itemEndMs": 8915
+          }
+        ],
+        "failures": [],
+        "stages": {
+          "browserLaunchMs": 10,
+          "bootstrapCompleteMs": 5613,
+          "searchAndCategoryCompleteMs": 6695
+        },
+        "counts": {
+          "Exhibits": 13,
+          "Key Documents": 6,
+          "Other Documents": 44,
+          "Transcripts": 0,
+          "Recordings": 0
+        },
+        "selected": 10,
+        "rowSelection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "uniqueFiles": 10,
+        "success": true,
+        "elapsedMs": 8916,
+        "totalBytes": 7009940,
+        "rpcCalls": 251
+      }
+    },
+    {
+      "category": "Exhibits",
+      "matter": "M12205",
+      "listedCount": 13,
+      "downloadedCount": 7,
+      "bytes": 128869367,
+      "bothMethodsSucceededAndMatched": true,
+      "chromeReplay": {
+        "label": "category-rpc-M12205-Exhibits",
+        "mode": "rpc",
+        "workers": 3,
+        "matter": "M12205",
+        "category": "Exhibits",
+        "limit": 10,
+        "viewport": {
+          "width": 1280,
+          "height": 1200
+        },
+        "rpcDelayMs": 0,
+        "startedAt": "2026-10-29T02:04:04.550Z",
+        "files": [
+          {
+            "filename": "H-2.pdf",
+            "status": 200,
+            "bytes": 138372,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "827140eea62d01f41b5f4395f23d96eaeef079d3d3b992f9076d98c0f8b35a37",
+            "signature": "255044462d312e370d25e2e3",
+            "transferMs": 286,
+            "exportReadyMs": 11210,
+            "transferEndMs": 11496,
+            "row": 2,
+            "worker": 1,
+            "itemStartMs": 11116,
+            "itemEndMs": 11578
+          },
+          {
+            "filename": "H-3.pdf",
+            "status": 200,
+            "bytes": 27666269,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "e9c4a91c3c1cc6e0718d67a0910ca29d0cd557021926582b71fd207cdbd35865",
+            "signature": "255044462d312e370d25e2e3",
+            "transferMs": 3011,
+            "exportReadyMs": 11220,
+            "transferEndMs": 14231,
+            "row": 3,
+            "worker": 2,
+            "itemStartMs": 11117,
+            "itemEndMs": 14324
+          },
+          {
+            "filename": "H-4.pdf",
+            "status": 200,
+            "bytes": 23852972,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "6ba345da577e1f0c7061eab111d810f0be6595cbb68e430d256eb8aadc9179cb",
+            "signature": "255044462d312e370d25e2e3",
+            "transferMs": 2997,
+            "exportReadyMs": 11704,
+            "transferEndMs": 14701,
+            "row": 4,
+            "worker": 1,
+            "itemStartMs": 11579,
+            "itemEndMs": 14785
+          },
+          {
+            "filename": "H-5-iii.pdf",
+            "status": 200,
+            "bytes": 5024232,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "d0a2438f3abac26dcf56f76566511c2b4305e9d47a86689fff9da4cc7a5e4170",
+            "signature": "255044462d312e370a25b5b5",
+            "transferMs": 790,
+            "exportReadyMs": 15119,
+            "transferEndMs": 15909,
+            "row": 12,
+            "worker": 1,
+            "itemStartMs": 14785,
+            "itemEndMs": 15992
+          },
+          {
+            "filename": "H-1.pdf",
+            "status": 200,
+            "bytes": 48365106,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "5540231ee03c51a81efa1ddccaae62e7151b229b13ba00c3a018e870c2558db8",
+            "signature": "255044462d312e370d25e2e3",
+            "transferMs": 4811,
+            "exportReadyMs": 11241,
+            "transferEndMs": 16052,
+            "row": 1,
+            "worker": 0,
+            "itemStartMs": 11115,
+            "itemEndMs": 16157
+          },
+          {
+            "filename": "H-6.pdf",
+            "status": 200,
+            "bytes": 165380,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "a62a13b3df630642c4cdb42a073fbf204da172838ae0f47ad52c426b0dccabb5",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 240,
+            "exportReadyMs": 16078,
+            "transferEndMs": 16318,
+            "row": 13,
+            "worker": 1,
+            "itemStartMs": 15992,
+            "itemEndMs": 16402
+          },
+          {
+            "filename": "H-5.pdf",
+            "status": 200,
+            "bytes": 23657036,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "eb743895c09bf0e4e69d81b71ab2cec1dccabe5497e9e9a9883699524f420e02",
+            "signature": "255044462d312e370d25e2e3",
+            "transferMs": 2583,
+            "exportReadyMs": 14459,
+            "transferEndMs": 17042,
+            "row": 9,
+            "worker": 2,
+            "itemStartMs": 14325,
+            "itemEndMs": 17120
+          }
+        ],
+        "failures": [],
+        "stages": {
+          "browserLaunchMs": 446,
+          "bootstrapCompleteMs": 10077,
+          "searchAndCategoryCompleteMs": 11114
+        },
+        "counts": {
+          "Exhibits": 13,
+          "Key Documents": 6,
+          "Other Documents": 44,
+          "Transcripts": 0,
+          "Recordings": 0
+        },
+        "selected": 7,
+        "rowSelection": [
+          1,
+          2,
+          3,
+          4,
+          9,
+          12,
+          13
+        ],
+        "uniqueFiles": 7,
+        "success": true,
+        "elapsedMs": 17121,
+        "totalBytes": 128869367,
+        "rpcCalls": 109
+      },
+      "httpOnlyReplay": {
+        "label": "category-http-M12205-Exhibits",
+        "mode": "http",
+        "workers": 3,
+        "matter": "M12205",
+        "category": "Exhibits",
+        "limit": 10,
+        "viewport": {
+          "width": 1280,
+          "height": 1200
+        },
+        "rpcDelayMs": 0,
+        "startedAt": "2026-10-29T02:05:49.576Z",
+        "files": [
+          {
+            "filename": "H-2.pdf",
+            "status": 200,
+            "bytes": 138372,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "827140eea62d01f41b5f4395f23d96eaeef079d3d3b992f9076d98c0f8b35a37",
+            "signature": "255044462d312e370d25e2e3",
+            "transferMs": 224,
+            "exportReadyMs": 8396,
+            "transferEndMs": 8620,
+            "row": 2,
+            "worker": 1,
+            "itemStartMs": 8262,
+            "itemEndMs": 8696
+          },
+          {
+            "filename": "H-4.pdf",
+            "status": 200,
+            "bytes": 23852972,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "6ba345da577e1f0c7061eab111d810f0be6595cbb68e430d256eb8aadc9179cb",
+            "signature": "255044462d312e370d25e2e3",
+            "transferMs": 5220,
+            "exportReadyMs": 8825,
+            "transferEndMs": 14045,
+            "row": 4,
+            "worker": 1,
+            "itemStartMs": 8696,
+            "itemEndMs": 14123
+          },
+          {
+            "filename": "H-3.pdf",
+            "status": 200,
+            "bytes": 27666269,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "e9c4a91c3c1cc6e0718d67a0910ca29d0cd557021926582b71fd207cdbd35865",
+            "signature": "255044462d312e370d25e2e3",
+            "transferMs": 6345,
+            "exportReadyMs": 8420,
+            "transferEndMs": 14765,
+            "row": 3,
+            "worker": 2,
+            "itemStartMs": 8264,
+            "itemEndMs": 14858
+          },
+          {
+            "filename": "H-5-iii.pdf",
+            "status": 200,
+            "bytes": 5024232,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "d0a2438f3abac26dcf56f76566511c2b4305e9d47a86689fff9da4cc7a5e4170",
+            "signature": "255044462d312e370a25b5b5",
+            "transferMs": 1193,
+            "exportReadyMs": 15752,
+            "transferEndMs": 16945,
+            "row": 12,
+            "worker": 2,
+            "itemStartMs": 14858,
+            "itemEndMs": 17023
+          },
+          {
+            "filename": "H-5.pdf",
+            "status": 200,
+            "bytes": 23657036,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "eb743895c09bf0e4e69d81b71ab2cec1dccabe5497e9e9a9883699524f420e02",
+            "signature": "255044462d312e370d25e2e3",
+            "transferMs": 2885,
+            "exportReadyMs": 14364,
+            "transferEndMs": 17249,
+            "row": 9,
+            "worker": 1,
+            "itemStartMs": 14126,
+            "itemEndMs": 17352
+          },
+          {
+            "filename": "H-1.pdf",
+            "status": 200,
+            "bytes": 48365106,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "5540231ee03c51a81efa1ddccaae62e7151b229b13ba00c3a018e870c2558db8",
+            "signature": "255044462d312e370d25e2e3",
+            "transferMs": 8882,
+            "exportReadyMs": 8358,
+            "transferEndMs": 17241,
+            "row": 1,
+            "worker": 0,
+            "itemStartMs": 8259,
+            "itemEndMs": 17364
+          },
+          {
+            "filename": "H-6.pdf",
+            "status": 200,
+            "bytes": 165380,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "a62a13b3df630642c4cdb42a073fbf204da172838ae0f47ad52c426b0dccabb5",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 283,
+            "exportReadyMs": 17207,
+            "transferEndMs": 17490,
+            "row": 13,
+            "worker": 2,
+            "itemStartMs": 17023,
+            "itemEndMs": 17575
+          }
+        ],
+        "failures": [],
+        "stages": {
+          "browserLaunchMs": 4,
+          "bootstrapCompleteMs": 5608,
+          "searchAndCategoryCompleteMs": 8258
+        },
+        "counts": {
+          "Exhibits": 13,
+          "Key Documents": 6,
+          "Other Documents": 44,
+          "Transcripts": 0,
+          "Recordings": 0
+        },
+        "selected": 7,
+        "rowSelection": [
+          1,
+          2,
+          3,
+          4,
+          9,
+          12,
+          13
+        ],
+        "uniqueFiles": 7,
+        "success": true,
+        "elapsedMs": 17576,
+        "totalBytes": 128869367,
+        "rpcCalls": 370
+      }
+    },
+    {
+      "category": "Key Documents",
+      "matter": "M12205",
+      "listedCount": 6,
+      "downloadedCount": 6,
+      "bytes": 1070395,
+      "bothMethodsSucceededAndMatched": true,
+      "chromeReplay": {
+        "label": "category-rpc-M12205-Key-Documents",
+        "mode": "rpc",
+        "workers": 3,
+        "matter": "M12205",
+        "category": "Key Documents",
+        "limit": 10,
+        "viewport": {
+          "width": 1280,
+          "height": 1200
+        },
+        "rpcDelayMs": 0,
+        "startedAt": "2026-10-29T02:04:22.035Z",
+        "files": [
+          {
+            "filename": "97354.pdf",
+            "status": 200,
+            "bytes": 37977,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "0b3463584beb305e09c3b8bbfe322c2d427f4b30b9ffb8574f3a2229f6a579c7",
+            "signature": "255044462d312e340d25e2e3",
+            "transferMs": 184,
+            "exportReadyMs": 10717,
+            "transferEndMs": 10901,
+            "row": 3,
+            "worker": 2,
+            "itemStartMs": 10627,
+            "itemEndMs": 10978
+          },
+          {
+            "filename": "97291.pdf",
+            "status": 200,
+            "bytes": 198023,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "f34db698240a655e51302a10c32d816fa3b787995f1ad500834482593c9c8afb",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 275,
+            "exportReadyMs": 10718,
+            "transferEndMs": 10993,
+            "row": 2,
+            "worker": 1,
+            "itemStartMs": 10627,
+            "itemEndMs": 11061
+          },
+          {
+            "filename": "97289.pdf",
+            "status": 200,
+            "bytes": 119742,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "18c1783451a3e849c1373df5e451e85c60ce66483b82190a0170926129ec8571",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 294,
+            "exportReadyMs": 10700,
+            "transferEndMs": 10994,
+            "row": 1,
+            "worker": 0,
+            "itemStartMs": 10625,
+            "itemEndMs": 11067
+          },
+          {
+            "filename": "98406.pdf",
+            "status": 200,
+            "bytes": 190653,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "4c2976168c5d8b699ed48675b152c844fb616279120de47e405d9219cd47b120",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 192,
+            "exportReadyMs": 11085,
+            "transferEndMs": 11277,
+            "row": 4,
+            "worker": 2,
+            "itemStartMs": 10978,
+            "itemEndMs": 11526
+          },
+          {
+            "filename": "99761.pdf",
+            "status": 200,
+            "bytes": 353429,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "88f9c211991347c63367fa3b16c56d8a90652c486b549521f42974c714c0614d",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 228,
+            "exportReadyMs": 11234,
+            "transferEndMs": 11462,
+            "row": 5,
+            "worker": 1,
+            "itemStartMs": 11061,
+            "itemEndMs": 11534
+          },
+          {
+            "filename": "102674.pdf",
+            "status": 200,
+            "bytes": 170571,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 281,
+            "exportReadyMs": 11264,
+            "transferEndMs": 11545,
+            "row": 6,
+            "worker": 0,
+            "itemStartMs": 11067,
+            "itemEndMs": 11619
+          }
+        ],
+        "failures": [],
+        "stages": {
+          "browserLaunchMs": 305,
+          "bootstrapCompleteMs": 9557,
+          "searchAndCategoryCompleteMs": 10625
+        },
+        "counts": {
+          "Exhibits": 13,
+          "Key Documents": 6,
+          "Other Documents": 44,
+          "Transcripts": 0,
+          "Recordings": 0
+        },
+        "selected": 6,
+        "rowSelection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "uniqueFiles": 6,
+        "success": true,
+        "elapsedMs": 11620,
+        "totalBytes": 1070395,
+        "rpcCalls": 100
+      },
+      "httpOnlyReplay": {
+        "label": "category-http-M12205-Key-Documents",
+        "mode": "http",
+        "workers": 3,
+        "matter": "M12205",
+        "category": "Key Documents",
+        "limit": 10,
+        "viewport": {
+          "width": 1280,
+          "height": 1200
+        },
+        "rpcDelayMs": 0,
+        "startedAt": "2026-10-29T02:06:07.372Z",
+        "files": [
+          {
+            "filename": "97289.pdf",
+            "status": 200,
+            "bytes": 119742,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "18c1783451a3e849c1373df5e451e85c60ce66483b82190a0170926129ec8571",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 260,
+            "exportReadyMs": 7194,
+            "transferEndMs": 7454,
+            "row": 1,
+            "worker": 0,
+            "itemStartMs": 7091,
+            "itemEndMs": 7521
+          },
+          {
+            "filename": "97354.pdf",
+            "status": 200,
+            "bytes": 37977,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "0b3463584beb305e09c3b8bbfe322c2d427f4b30b9ffb8574f3a2229f6a579c7",
+            "signature": "255044462d312e340d25e2e3",
+            "transferMs": 285,
+            "exportReadyMs": 7193,
+            "transferEndMs": 7478,
+            "row": 3,
+            "worker": 2,
+            "itemStartMs": 7094,
+            "itemEndMs": 7545
+          },
+          {
+            "filename": "97291.pdf",
+            "status": 200,
+            "bytes": 198023,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "f34db698240a655e51302a10c32d816fa3b787995f1ad500834482593c9c8afb",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 333,
+            "exportReadyMs": 7170,
+            "transferEndMs": 7504,
+            "row": 2,
+            "worker": 1,
+            "itemStartMs": 7093,
+            "itemEndMs": 7571
+          },
+          {
+            "filename": "98406.pdf",
+            "status": 200,
+            "bytes": 190653,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "4c2976168c5d8b699ed48675b152c844fb616279120de47e405d9219cd47b120",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 82,
+            "exportReadyMs": 7590,
+            "transferEndMs": 7672,
+            "row": 4,
+            "worker": 0,
+            "itemStartMs": 7521,
+            "itemEndMs": 7766
+          },
+          {
+            "filename": "102674.pdf",
+            "status": 200,
+            "bytes": 170571,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "6a3b3b90596df09605d7a978caf32d7bdbefb4f0b68648388733c2376d45757f",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 102,
+            "exportReadyMs": 7658,
+            "transferEndMs": 7760,
+            "row": 6,
+            "worker": 1,
+            "itemStartMs": 7571,
+            "itemEndMs": 7832
+          },
+          {
+            "filename": "99761.pdf",
+            "status": 200,
+            "bytes": 353429,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "88f9c211991347c63367fa3b16c56d8a90652c486b549521f42974c714c0614d",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 155,
+            "exportReadyMs": 7615,
+            "transferEndMs": 7770,
+            "row": 5,
+            "worker": 2,
+            "itemStartMs": 7545,
+            "itemEndMs": 7839
+          }
+        ],
+        "failures": [],
+        "stages": {
+          "browserLaunchMs": 4,
+          "bootstrapCompleteMs": 6226,
+          "searchAndCategoryCompleteMs": 7091
+        },
+        "counts": {
+          "Exhibits": 13,
+          "Key Documents": 6,
+          "Other Documents": 44,
+          "Transcripts": 0,
+          "Recordings": 0
+        },
+        "selected": 6,
+        "rowSelection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "uniqueFiles": 6,
+        "success": true,
+        "elapsedMs": 7840,
+        "totalBytes": 1070395,
+        "rpcCalls": 243
+      }
+    },
+    {
+      "category": "Transcripts",
+      "matter": "M12451",
+      "listedCount": 7,
+      "downloadedCount": 7,
+      "bytes": 5178346,
+      "bothMethodsSucceededAndMatched": true,
+      "chromeReplay": {
+        "label": "media-fixed-rpc-Transcripts",
+        "mode": "rpc",
+        "workers": 3,
+        "matter": "M12451",
+        "category": "Transcripts",
+        "limit": 10,
+        "viewport": {
+          "width": 1280,
+          "height": 1200
+        },
+        "rpcDelayMs": 0,
+        "startedAt": "2026-10-29T02:07:51.414Z",
+        "files": [
+          {
+            "filename": "NSEB-M12451-January+9,+2026.pdf",
+            "status": 200,
+            "bytes": 994965,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "334992735883b02eeb226c8e20ae6ef95ebe9f8ec2c51e062293abf54881e49f",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 366,
+            "exportReadyMs": 22572,
+            "transferEndMs": 22938,
+            "row": 3,
+            "worker": 2,
+            "itemStartMs": 22370,
+            "itemEndMs": 23033
+          },
+          {
+            "filename": "NSEB-M12451-January+7,+2026.pdf",
+            "status": 200,
+            "bytes": 1078958,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "698ecf67582d1125963aef3404b7c1400cd33d0d773b4bb3338e4a5c6c79e20d",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 456,
+            "exportReadyMs": 22595,
+            "transferEndMs": 23051,
+            "row": 1,
+            "worker": 0,
+            "itemStartMs": 22369,
+            "itemEndMs": 23137
+          },
+          {
+            "filename": "NSEB-M12451-January+8,+2026.pdf",
+            "status": 200,
+            "bytes": 1106211,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "2b7a2bc97da12225679bef5260d1719858447e8bacef70bcb6debf0dcffd3b47",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 522,
+            "exportReadyMs": 22588,
+            "transferEndMs": 23110,
+            "row": 2,
+            "worker": 1,
+            "itemStartMs": 22370,
+            "itemEndMs": 23179
+          },
+          {
+            "filename": "NSEB-M12451-January+12,+2026+Part+A.pdf",
+            "status": 200,
+            "bytes": 555582,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "9207dba31a6efc01ac25b17c308a9391cb7c84526baefb9a0d1a9ca06e8a6a58",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 137,
+            "exportReadyMs": 23241,
+            "transferEndMs": 23378,
+            "row": 4,
+            "worker": 2,
+            "itemStartMs": 23034,
+            "itemEndMs": 23449
+          },
+          {
+            "filename": "NSEB-M12451-January+12,+2026+Part+B.pdf",
+            "status": 200,
+            "bytes": 612101,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "9c8c89ca6589fe8d0a1dc388d727e14acfce6ccda060bc7f5f7e31267eb7073a",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 166,
+            "exportReadyMs": 23314,
+            "transferEndMs": 23480,
+            "row": 5,
+            "worker": 0,
+            "itemStartMs": 23137,
+            "itemEndMs": 23556
+          },
+          {
+            "filename": "NSEB-M12451-January+13,+2026+Part+A.pdf",
+            "status": 200,
+            "bytes": 580906,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "7b1aef8bf676bf98185e995bc50ec1fef6ba448b482bbbe1ea8067a6c992a9ef",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 150,
+            "exportReadyMs": 23422,
+            "transferEndMs": 23572,
+            "row": 6,
+            "worker": 1,
+            "itemStartMs": 23180,
+            "itemEndMs": 23684
+          },
+          {
+            "filename": "NSEB-M12451-January+13,+2026+Part+B.pdf",
+            "status": 200,
+            "bytes": 249623,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "796cb7c915cba64bc4466f1de913341717a0b3ba28a470693284d06fb957e991",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 84,
+            "exportReadyMs": 23676,
+            "transferEndMs": 23760,
+            "row": 7,
+            "worker": 2,
+            "itemStartMs": 23450,
+            "itemEndMs": 23837
+          }
+        ],
+        "failures": [],
+        "stages": {
+          "browserLaunchMs": 332,
+          "bootstrapCompleteMs": 10376,
+          "searchAndCategoryCompleteMs": 22369
+        },
+        "counts": {
+          "Exhibits": 221,
+          "Key Documents": 7,
+          "Other Documents": 88,
+          "Transcripts": 7,
+          "Recordings": 8
+        },
+        "selected": 7,
+        "rowSelection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "uniqueFiles": 7,
+        "success": true,
+        "elapsedMs": 23838,
+        "totalBytes": 5178346,
+        "rpcCalls": 1031
+      },
+      "httpOnlyReplay": {
+        "label": "media-fixed-http-Transcripts",
+        "mode": "http",
+        "workers": 3,
+        "matter": "M12451",
+        "category": "Transcripts",
+        "limit": 10,
+        "viewport": {
+          "width": 1280,
+          "height": 1200
+        },
+        "rpcDelayMs": 0,
+        "startedAt": "2026-10-29T02:10:01.691Z",
+        "files": [
+          {
+            "filename": "NSEB-M12451-January+9,+2026.pdf",
+            "status": 200,
+            "bytes": 994965,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "334992735883b02eeb226c8e20ae6ef95ebe9f8ec2c51e062293abf54881e49f",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 327,
+            "exportReadyMs": 16543,
+            "transferEndMs": 16870,
+            "row": 3,
+            "worker": 2,
+            "itemStartMs": 16228,
+            "itemEndMs": 16944
+          },
+          {
+            "filename": "NSEB-M12451-January+7,+2026.pdf",
+            "status": 200,
+            "bytes": 1078958,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "698ecf67582d1125963aef3404b7c1400cd33d0d773b4bb3338e4a5c6c79e20d",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 473,
+            "exportReadyMs": 16513,
+            "transferEndMs": 16987,
+            "row": 1,
+            "worker": 0,
+            "itemStartMs": 16227,
+            "itemEndMs": 17057
+          },
+          {
+            "filename": "NSEB-M12451-January+8,+2026.pdf",
+            "status": 200,
+            "bytes": 1106211,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "2b7a2bc97da12225679bef5260d1719858447e8bacef70bcb6debf0dcffd3b47",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 477,
+            "exportReadyMs": 16535,
+            "transferEndMs": 17012,
+            "row": 2,
+            "worker": 1,
+            "itemStartMs": 16228,
+            "itemEndMs": 17084
+          },
+          {
+            "filename": "NSEB-M12451-January+12,+2026+Part+A.pdf",
+            "status": 200,
+            "bytes": 555582,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "9207dba31a6efc01ac25b17c308a9391cb7c84526baefb9a0d1a9ca06e8a6a58",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 140,
+            "exportReadyMs": 17238,
+            "transferEndMs": 17378,
+            "row": 4,
+            "worker": 2,
+            "itemStartMs": 16945,
+            "itemEndMs": 17476
+          },
+          {
+            "filename": "NSEB-M12451-January+12,+2026+Part+B.pdf",
+            "status": 200,
+            "bytes": 612101,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "9c8c89ca6589fe8d0a1dc388d727e14acfce6ccda060bc7f5f7e31267eb7073a",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 141,
+            "exportReadyMs": 17348,
+            "transferEndMs": 17489,
+            "row": 5,
+            "worker": 0,
+            "itemStartMs": 17057,
+            "itemEndMs": 17560
+          },
+          {
+            "filename": "NSEB-M12451-January+13,+2026+Part+A.pdf",
+            "status": 200,
+            "bytes": 580906,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "7b1aef8bf676bf98185e995bc50ec1fef6ba448b482bbbe1ea8067a6c992a9ef",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 139,
+            "exportReadyMs": 17374,
+            "transferEndMs": 17513,
+            "row": 6,
+            "worker": 1,
+            "itemStartMs": 17084,
+            "itemEndMs": 17593
+          },
+          {
+            "filename": "NSEB-M12451-January+13,+2026+Part+B.pdf",
+            "status": 200,
+            "bytes": 249623,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "796cb7c915cba64bc4466f1de913341717a0b3ba28a470693284d06fb957e991",
+            "signature": "255044462d312e370d0a25b5",
+            "transferMs": 86,
+            "exportReadyMs": 17785,
+            "transferEndMs": 17871,
+            "row": 7,
+            "worker": 2,
+            "itemStartMs": 17477,
+            "itemEndMs": 17947
+          }
+        ],
+        "failures": [],
+        "stages": {
+          "browserLaunchMs": 5,
+          "bootstrapCompleteMs": 6072,
+          "searchAndCategoryCompleteMs": 16227
+        },
+        "counts": {
+          "Exhibits": 221,
+          "Key Documents": 7,
+          "Other Documents": 88,
+          "Transcripts": 7,
+          "Recordings": 8
+        },
+        "selected": 7,
+        "rowSelection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "uniqueFiles": 7,
+        "success": true,
+        "elapsedMs": 17949,
+        "totalBytes": 5178346,
+        "rpcCalls": 190
+      }
+    },
+    {
+      "category": "Recordings",
+      "matter": "M12451",
+      "listedCount": 8,
+      "downloadedCount": 8,
+      "bytes": 2295987464,
+      "bothMethodsSucceededAndMatched": true,
+      "chromeReplay": {
+        "label": "media-fixed-rpc-Recordings",
+        "mode": "rpc",
+        "workers": 3,
+        "matter": "M12451",
+        "category": "Recordings",
+        "limit": 10,
+        "viewport": {
+          "width": 1280,
+          "height": 1200
+        },
+        "rpcDelayMs": 0,
+        "startedAt": "2026-10-29T02:08:15.543Z",
+        "files": [
+          {
+            "filename": "260108-T001.MP3",
+            "status": 200,
+            "bytes": 516476864,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "3189a9c9db395adc8fd1b795956d95903225dba1fc3037adb533fcb9f958cf05",
+            "signature": "fffbb40c0000023507c17189",
+            "transferMs": 53303,
+            "exportReadyMs": 17493,
+            "transferEndMs": 70796,
+            "row": 3,
+            "worker": 2,
+            "itemStartMs": 17296,
+            "itemEndMs": 70872
+          },
+          {
+            "filename": "260107-T001.MP3",
+            "status": 200,
+            "bytes": 532079552,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "fc1584dd0134d8fd73197f600f5651480e894f90153890e55b65e57c7c8e5205",
+            "signature": "fffbb40c0000024f07c06189",
+            "transferMs": 62638,
+            "exportReadyMs": 17508,
+            "transferEndMs": 80146,
+            "row": 2,
+            "worker": 1,
+            "itemStartMs": 17295,
+            "itemEndMs": 80227
+          },
+          {
+            "filename": "260106-T001.MP3",
+            "status": 200,
+            "bytes": 543360960,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "a500c5ca0d6d5bc8677d60feacefc23af2df7e413d0a578cca7eee5ed5fefb5a",
+            "signature": "fffbb40c000002600840e189",
+            "transferMs": 64637,
+            "exportReadyMs": 17510,
+            "transferEndMs": 82147,
+            "row": 1,
+            "worker": 0,
+            "itemStartMs": 17294,
+            "itemEndMs": 82229
+          },
+          {
+            "filename": "day+4+trk+1.MP3",
+            "status": 200,
+            "bytes": 230038400,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "5380611600bb9a2d71f3754d7f764aa6d71acd359f98de03d9adfef75869ae37",
+            "signature": "fffbb40c0000029408406189",
+            "transferMs": 27697,
+            "exportReadyMs": 71085,
+            "transferEndMs": 98782,
+            "row": 4,
+            "worker": 2,
+            "itemStartMs": 70873,
+            "itemEndMs": 98856
+          },
+          {
+            "filename": "day+5+TRK+2.MP3",
+            "status": 200,
+            "bytes": 2832320,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "03be9cdcc42c32491ce4427a2216194e16b3442776a232203a75c41b736e8815",
+            "signature": "fffbb40c000002550541f96c",
+            "transferMs": 390,
+            "exportReadyMs": 99083,
+            "transferEndMs": 99473,
+            "row": 7,
+            "worker": 2,
+            "itemStartMs": 98857,
+            "itemEndMs": 99615
+          },
+          {
+            "filename": "M12451+-+Accessing+Video+Recording+of+M11149+CSAP+Preliminary.pdf",
+            "status": 200,
+            "bytes": 58184,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "ca2c2e76dc3ca1899f62238ca15cc467b9a9577172ac46ce6e2618a93136c373",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 110,
+            "exportReadyMs": 99862,
+            "transferEndMs": 99972,
+            "row": 8,
+            "worker": 2,
+            "itemStartMs": 99616,
+            "itemEndMs": 100072
+          },
+          {
+            "filename": "day+5+TRK+1.MP3",
+            "status": 200,
+            "bytes": 206350976,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "785bae118b2184f6e0eb92938075c213144eeea859809fb1c90054f4060bab4d",
+            "signature": "fffbb40c0000025e08c17189",
+            "transferMs": 20109,
+            "exportReadyMs": 82441,
+            "transferEndMs": 102550,
+            "row": 6,
+            "worker": 0,
+            "itemStartMs": 82230,
+            "itemEndMs": 102619
+          },
+          {
+            "filename": "Day+4+trk+2.MP3",
+            "status": 200,
+            "bytes": 264790208,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "02379c432d40f5e49e62ab0be273be537dc9e46e8ff58b908835f71f1da38591",
+            "signature": "fffbb40c0000022e09406186",
+            "transferMs": 25258,
+            "exportReadyMs": 80519,
+            "transferEndMs": 105777,
+            "row": 5,
+            "worker": 1,
+            "itemStartMs": 80228,
+            "itemEndMs": 105844
+          }
+        ],
+        "failures": [],
+        "stages": {
+          "browserLaunchMs": 336,
+          "bootstrapCompleteMs": 9745,
+          "searchAndCategoryCompleteMs": 17293
+        },
+        "counts": {
+          "Exhibits": 221,
+          "Key Documents": 7,
+          "Other Documents": 88,
+          "Transcripts": 7,
+          "Recordings": 8
+        },
+        "selected": 8,
+        "rowSelection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "uniqueFiles": 8,
+        "success": true,
+        "elapsedMs": 105846,
+        "totalBytes": 2295987464,
+        "rpcCalls": 659
+      },
+      "httpOnlyReplay": {
+        "label": "media-fixed-http-Recordings",
+        "mode": "http",
+        "workers": 3,
+        "matter": "M12451",
+        "category": "Recordings",
+        "limit": 10,
+        "viewport": {
+          "width": 1280,
+          "height": 1200
+        },
+        "rpcDelayMs": 0,
+        "startedAt": "2026-10-29T02:10:19.842Z",
+        "files": [
+          {
+            "filename": "260106-T001.MP3",
+            "status": 200,
+            "bytes": 543360960,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "a500c5ca0d6d5bc8677d60feacefc23af2df7e413d0a578cca7eee5ed5fefb5a",
+            "signature": "fffbb40c000002600840e189",
+            "transferMs": 64506,
+            "exportReadyMs": 13448,
+            "transferEndMs": 77954,
+            "row": 1,
+            "worker": 0,
+            "itemStartMs": 13287,
+            "itemEndMs": 78027
+          },
+          {
+            "filename": "260108-T001.MP3",
+            "status": 200,
+            "bytes": 516476864,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "3189a9c9db395adc8fd1b795956d95903225dba1fc3037adb533fcb9f958cf05",
+            "signature": "fffbb40c0000023507c17189",
+            "transferMs": 65863,
+            "exportReadyMs": 13585,
+            "transferEndMs": 79448,
+            "row": 3,
+            "worker": 2,
+            "itemStartMs": 13289,
+            "itemEndMs": 79521
+          },
+          {
+            "filename": "260107-T001.MP3",
+            "status": 200,
+            "bytes": 532079552,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "fc1584dd0134d8fd73197f600f5651480e894f90153890e55b65e57c7c8e5205",
+            "signature": "fffbb40c0000024f07c06189",
+            "transferMs": 74063,
+            "exportReadyMs": 13596,
+            "transferEndMs": 87659,
+            "row": 2,
+            "worker": 1,
+            "itemStartMs": 13288,
+            "itemEndMs": 87735
+          },
+          {
+            "filename": "day+4+trk+1.MP3",
+            "status": 200,
+            "bytes": 230038400,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "5380611600bb9a2d71f3754d7f764aa6d71acd359f98de03d9adfef75869ae37",
+            "signature": "fffbb40c0000029408406189",
+            "transferMs": 25363,
+            "exportReadyMs": 78353,
+            "transferEndMs": 103716,
+            "row": 4,
+            "worker": 0,
+            "itemStartMs": 78027,
+            "itemEndMs": 103790
+          },
+          {
+            "filename": "Day+4+trk+2.MP3",
+            "status": 200,
+            "bytes": 264790208,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "02379c432d40f5e49e62ab0be273be537dc9e46e8ff58b908835f71f1da38591",
+            "signature": "fffbb40c0000022e09406186",
+            "transferMs": 24181,
+            "exportReadyMs": 79835,
+            "transferEndMs": 104016,
+            "row": 5,
+            "worker": 2,
+            "itemStartMs": 79521,
+            "itemEndMs": 104090
+          },
+          {
+            "filename": "day+5+TRK+2.MP3",
+            "status": 200,
+            "bytes": 2832320,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "03be9cdcc42c32491ce4427a2216194e16b3442776a232203a75c41b736e8815",
+            "signature": "fffbb40c000002550541f96c",
+            "transferMs": 237,
+            "exportReadyMs": 104085,
+            "transferEndMs": 104322,
+            "row": 7,
+            "worker": 0,
+            "itemStartMs": 103791,
+            "itemEndMs": 104424
+          },
+          {
+            "filename": "M12451+-+Accessing+Video+Recording+of+M11149+CSAP+Preliminary.pdf",
+            "status": 200,
+            "bytes": 58184,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "ca2c2e76dc3ca1899f62238ca15cc467b9a9577172ac46ce6e2618a93136c373",
+            "signature": "255044462d312e360d25e2e3",
+            "transferMs": 76,
+            "exportReadyMs": 104317,
+            "transferEndMs": 104393,
+            "row": 8,
+            "worker": 2,
+            "itemStartMs": 104090,
+            "itemEndMs": 104477
+          },
+          {
+            "filename": "day+5+TRK+1.MP3",
+            "status": 200,
+            "bytes": 206350976,
+            "mime": "application/octet-stream;charset=UTF-8",
+            "sha256": "785bae118b2184f6e0eb92938075c213144eeea859809fb1c90054f4060bab4d",
+            "signature": "fffbb40c0000025e08c17189",
+            "transferMs": 16723,
+            "exportReadyMs": 88083,
+            "transferEndMs": 104806,
+            "row": 6,
+            "worker": 1,
+            "itemStartMs": 87736,
+            "itemEndMs": 104890
+          }
+        ],
+        "failures": [],
+        "stages": {
+          "browserLaunchMs": 5,
+          "bootstrapCompleteMs": 5766,
+          "searchAndCategoryCompleteMs": 13287
+        },
+        "counts": {
+          "Exhibits": 221,
+          "Key Documents": 7,
+          "Other Documents": 88,
+          "Transcripts": 7,
+          "Recordings": 8
+        },
+        "selected": 8,
+        "rowSelection": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "uniqueFiles": 8,
+        "success": true,
+        "elapsedMs": 104892,
+        "totalBytes": 2295987464,
+        "rpcCalls": 180
+      }
+    }
+  ],
+  "emptyCategoryTest": {
+    "label": "category-http-M12205-Transcripts",
+    "mode": "http",
+    "workers": 3,
+    "matter": "M12205",
+    "category": "Transcripts",
+    "limit": 10,
+    "viewport": {
+      "width": 1280,
+      "height": 1200
+    },
+    "rpcDelayMs": 0,
+    "startedAt": "2026-10-29T02:07:27.266Z",
+    "files": [],
+    "failures": [],
+    "stages": {
+      "browserLaunchMs": 5,
+      "bootstrapCompleteMs": 6549,
+      "searchAndCategoryCompleteMs": 9031
+    },
+    "counts": {
+      "Exhibits": 13,
+      "Key Documents": 6,
+      "Other Documents": 44,
+      "Transcripts": 0,
+      "Recordings": 0
+    },
+    "selected": 0,
+    "success": true,
+    "elapsedMs": 9031,
+    "totalBytes": 0,
+    "rpcCalls": 374
+  },
+  "artifactValidation": {
+    "pdfChecks": [
+      {
+        "run": "rpc3-other-initial",
+        "filename": "104160.pdf",
+        "pages": 2,
+        "valid": true
+      },
+      {
+        "run": "rpc3-other-initial",
+        "filename": "102674.pdf",
+        "pages": 2,
+        "valid": true
+      },
+      {
+        "run": "rpc3-other-initial",
+        "filename": "102454.pdf",
+        "pages": 1,
+        "valid": true
+      },
+      {
+        "run": "rpc3-other-initial",
+        "filename": "102417.pdf",
+        "pages": 2,
+        "valid": true
+      },
+      {
+        "run": "rpc3-other-initial",
+        "filename": "102329.pdf",
+        "pages": 2,
+        "valid": true
+      },
+      {
+        "run": "rpc3-other-initial",
+        "filename": "102293.pdf",
+        "pages": 2,
+        "valid": true
+      },
+      {
+        "run": "rpc3-other-initial",
+        "filename": "102295.pdf",
+        "pages": 3,
+        "valid": true
+      },
+      {
+        "run": "rpc3-other-initial",
+        "filename": "102266.pdf",
+        "pages": 2,
+        "valid": true
+      },
+      {
+        "run": "rpc3-other-initial",
+        "filename": "102197.pdf",
+        "pages": 8,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Exhibits",
+        "filename": "H-2.pdf",
+        "pages": 1,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Exhibits",
+        "filename": "H-3.pdf",
+        "pages": 212,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Exhibits",
+        "filename": "H-4.pdf",
+        "pages": 204,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Exhibits",
+        "filename": "H-5-iii.pdf",
+        "pages": 21,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Exhibits",
+        "filename": "H-1.pdf",
+        "pages": 43,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Exhibits",
+        "filename": "H-6.pdf",
+        "pages": 3,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Exhibits",
+        "filename": "H-5.pdf",
+        "pages": 240,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Key-Documents",
+        "filename": "97354.pdf",
+        "pages": 1,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Key-Documents",
+        "filename": "97291.pdf",
+        "pages": 2,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Key-Documents",
+        "filename": "97289.pdf",
+        "pages": 1,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Key-Documents",
+        "filename": "98406.pdf",
+        "pages": 2,
+        "valid": true
+      },
+      {
+        "run": "category-rpc-M12205-Key-Documents",
+        "filename": "99761.pdf",
+        "pages": 32,
+        "valid": true
+      },
+      {
+        "run": "media-fixed-rpc-Transcripts",
+        "filename": "NSEB-M12451-January+9,+2026.pdf",
+        "pages": 300,
+        "valid": true
+      },
+      {
+        "run": "media-fixed-rpc-Transcripts",
+        "filename": "NSEB-M12451-January+7,+2026.pdf",
+        "pages": 336,
+        "valid": true
+      },
+      {
+        "run": "media-fixed-rpc-Transcripts",
+        "filename": "NSEB-M12451-January+8,+2026.pdf",
+        "pages": 331,
+        "valid": true
+      },
+      {
+        "run": "media-fixed-rpc-Transcripts",
+        "filename": "NSEB-M12451-January+12,+2026+Part+A.pdf",
+        "pages": 140,
+        "valid": true
+      },
+      {
+        "run": "media-fixed-rpc-Transcripts",
+        "filename": "NSEB-M12451-January+12,+2026+Part+B.pdf",
+        "pages": 165,
+        "valid": true
+      },
+      {
+        "run": "media-fixed-rpc-Transcripts",
+        "filename": "NSEB-M12451-January+13,+2026+Part+A.pdf",
+        "pages": 144,
+        "valid": true
+      },
+      {
+        "run": "media-fixed-rpc-Transcripts",
+        "filename": "NSEB-M12451-January+13,+2026+Part+B.pdf",
+        "pages": 20,
+        "valid": true
+      },
+      {
+        "run": "media-fixed-rpc-Recordings",
+        "filename": "M12451+-+Accessing+Video+Recording+of+M11149+CSAP+Preliminary.pdf",
+        "pages": 1,
+        "valid": true
+      }
+    ],
+    "zip": {
+      "path": "outputs/M12205-Other-Documents-10-verified.zip",
+      "bytes": 6682861,
+      "creationMs": 167.8752499865368,
+      "files": 10,
+      "crcError": null,
+      "hashesMatch": true
+    }
+  },
+  "audioValidation": [
+    {
+      "filename": "260108-T001.MP3",
+      "exitCode": 0,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "21519.869333",
+          "size": "516476864"
+        }
+      },
+      "error": ""
+    },
+    {
+      "filename": "260107-T001.MP3",
+      "exitCode": 0,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "22169.981333",
+          "size": "532079552"
+        }
+      },
+      "error": ""
+    },
+    {
+      "filename": "260106-T001.MP3",
+      "exitCode": 0,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "22640.040000",
+          "size": "543360960"
+        }
+      },
+      "error": ""
+    },
+    {
+      "filename": "day+4+trk+1.MP3",
+      "exitCode": 0,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "9584.933333",
+          "size": "230038400"
+        }
+      },
+      "error": ""
+    },
+    {
+      "filename": "day+5+TRK+2.MP3",
+      "exitCode": 0,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "118.013333",
+          "size": "2832320"
+        }
+      },
+      "error": ""
+    },
+    {
+      "filename": "day+5+TRK+1.MP3",
+      "exitCode": 0,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "8597.957333",
+          "size": "206350976"
+        }
+      },
+      "error": ""
+    },
+    {
+      "filename": "Day+4+trk+2.MP3",
+      "exitCode": 0,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "mp3",
+            "sample_rate": "48000",
+            "channels": 2
+          }
+        ],
+        "format": {
+          "duration": "11032.925333",
+          "size": "264790208"
+        }
+      },
+      "error": ""
+    }
+  ],
+  "allReferenceChecks": {
+    "checks": [
+      {
+        "label": "bench-1-dom1",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "bench-2-rpc1",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "bench-3-dom3",
+        "reportedSuccess": true,
+        "matchingReference": false,
+        "files": 10,
+        "mismatches": [
+          {
+            "row": 4,
+            "filename": "102674.pdf"
+          },
+          {
+            "row": 5,
+            "filename": "102417.pdf"
+          },
+          {
+            "row": 7,
+            "filename": "102330.pdf"
+          },
+          {
+            "row": 8,
+            "filename": "102293.pdf"
+          }
+        ]
+      },
+      {
+        "label": "bench-4-rpc3",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "bench-5-rpc3",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "bench-6-dom3",
+        "reportedSuccess": false,
+        "matchingReference": false,
+        "files": 9,
+        "mismatches": [
+          {
+            "row": 8,
+            "filename": "102203.pdf"
+          },
+          {
+            "row": 10,
+            "filename": "102214.pdf"
+          },
+          {
+            "row": 9,
+            "filename": "102205.pdf"
+          }
+        ]
+      },
+      {
+        "label": "bench-7-rpc1",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "bench-8-dom1",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-1-dom1",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-10-rpc1",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-11-http1",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-12-dom1",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-13-http3-parallel-init",
+        "matchingReference": false,
+        "files": 0,
+        "mismatches": []
+      },
+      {
+        "label": "final-14-http3-parallel-init",
+        "matchingReference": false,
+        "files": 0,
+        "mismatches": []
+      },
+      {
+        "label": "final-2-http1",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-3-rpc1",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-4-dom3",
+        "reportedSuccess": false,
+        "matchingReference": false,
+        "files": 8,
+        "mismatches": []
+      },
+      {
+        "label": "final-5-rpc3",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-6-http3",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-7-http3",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-8-rpc3",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "final-9-dom3",
+        "reportedSuccess": false,
+        "matchingReference": false,
+        "files": 9,
+        "mismatches": []
+      },
+      {
+        "label": "http3-other-first",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      },
+      {
+        "label": "rpc3-other-initial",
+        "reportedSuccess": true,
+        "matchingReference": true,
+        "files": 10,
+        "mismatches": []
+      }
+    ],
+    "paired": [
+      {
+        "a": "category-rpc-M12205-Exhibits",
+        "b": "category-http-M12205-Exhibits",
+        "files": 7,
+        "bytes": 128869367,
+        "match": true
+      },
+      {
+        "a": "category-rpc-M12205-Key-Documents",
+        "b": "category-http-M12205-Key-Documents",
+        "files": 6,
+        "bytes": 1070395,
+        "match": true
+      },
+      {
+        "a": "media-fixed-rpc-Transcripts",
+        "b": "media-fixed-http-Transcripts",
+        "files": 7,
+        "bytes": 5178346,
+        "match": true
+      },
+      {
+        "a": "media-fixed-rpc-Recordings",
+        "b": "media-fixed-http-Recordings",
+        "files": 8,
+        "bytes": 2295987464,
+        "match": true
+      }
+    ]
+  },
+  "alternatives": {
+    "httpOnlyInitialization": {
+      "tested": true,
+      "flow": [
+        "GET public WebDirect bootstrap HTML with fresh cookies",
+        "POST browser-details initialization data; obtain UI id and CSRF token",
+        "Send observed initialization, resize and CSS-ack RPCs",
+        "Discover live component IDs; replay matter search and category selection",
+        "Generate and download export resources with the same cookies"
+      ],
+      "authentication": "The same public guest access as the website; no credentials or access controls bypassed",
+      "limitations": "Still coupled to FileMaker/Vaadin UI protocol and session counters; not a published stable records API"
+    },
+    "scriptDeepLink": {
+      "status": "Documented by Claris, but no usable site-specific script name/link identified",
+      "source": "https://help.claris.com/en/webdirect-guide/content/linking-to-a-database-from-an-html-page.html",
+      "requirement": "An existing known script and fmurlscript privilege"
+    },
+    "fileMakerDataAPI": {
+      "status": "No authorized usable Data API connection established; not needed for the working HTTP guest-session path",
+      "source": "https://help.claris.com/en/data-api-guide/content/log-in-database-session.html",
+      "requirement": "Configured API access and an authorized database login"
+    },
+    "saveListAndPrint": {
+      "status": "Inventory/snapshot options, not substitutes for generating document downloads; read explicit category counts directly"
+    }
+  },
+  "remainingWork": [
+    "Long-lived session expiry and recovery",
+    "Pagination beyond rows currently returned (the tested selected sets were available in initial returned state)",
+    "Attachment-size handling, particularly the 2.30 GB recording set",
+    "Inbox integration, ZIP delivery, deployment and monitoring"
+  ],
+  "scratchCleanup": {
+    "temporaryAudioBytesRemovedAfterHashAndCodecValidation": 4591858560,
+    "retained": "Hashes, sizes, codec metadata, timings, PDFs, and the verified ten-document ZIP"
+  }
+}

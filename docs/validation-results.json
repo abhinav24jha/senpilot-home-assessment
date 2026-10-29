@@ -1,0 +1,332 @@
+{
+  "run_utc": "20261029T031218Z",
+  "scope": "Five synthetic emails, real Jev and public UARB; local MIME replies only, no SMTP or IMAP.",
+  "data_directory": "data/validation-20261029T031218Z",
+  "passed": 5,
+  "total": 5,
+  "cases": [
+    {
+      "name": "body_only_matter",
+      "input": {
+        "subject": "A quick regulatory research request",
+        "body": "Hi Agent,\n\nPlease send me the Other Documents files for matter M12205.\n\nThanks, Alex"
+      },
+      "expected": {
+        "matter": "M12205",
+        "category": "Other Documents",
+        "files": 10,
+        "outcome": "success"
+      },
+      "job_id": "484a80d57acdeed711aa4fdb",
+      "status": "prepared",
+      "outcome": "success",
+      "pipeline_seconds": 15.567,
+      "checks": [
+        "prepared response hash",
+        "synthetic recipient",
+        "auto-reply header",
+        "correct interpreted matter/category",
+        "all five website counts in reply",
+        "matter metadata",
+        "expected file count",
+        "MIME ZIP equals saved ZIP",
+        "ZIP entry count and CRC",
+        "every source/archive size and SHA-256",
+        "PDF signatures",
+        "repeat input reuses unchanged job"
+      ],
+      "jev_audit": {
+        "model": "jev-1.14.0",
+        "candidate_matters": [
+          "M12205"
+        ],
+        "answers": {
+          "intent": {
+            "choice": "REQUEST",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "matter": {
+            "choice": "M12205",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "category": {
+            "choice": "OTHER_DOCUMENTS",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          }
+        },
+        "elapsed_ms": 248,
+        "confidence_threshold": 0.8,
+        "probability_threshold": 0.9
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "file_count": 10,
+      "download_bytes": 7009940,
+      "mime_bytes": 9146915,
+      "passed": true
+    },
+    {
+      "name": "corrected_subject",
+      "input": {
+        "subject": "M12383 Exhibits request",
+        "body": "Correction to the subject: please ignore M12383 and Exhibits. What I need now is Key Documents for M12205. Please send those files only."
+      },
+      "expected": {
+        "matter": "M12205",
+        "category": "Key Documents",
+        "files": 6,
+        "outcome": "success"
+      },
+      "job_id": "6028582969d251caa4790f6d",
+      "status": "prepared",
+      "outcome": "success",
+      "pipeline_seconds": 7.773,
+      "checks": [
+        "prepared response hash",
+        "synthetic recipient",
+        "auto-reply header",
+        "correct interpreted matter/category",
+        "all five website counts in reply",
+        "matter metadata",
+        "expected file count",
+        "MIME ZIP equals saved ZIP",
+        "ZIP entry count and CRC",
+        "every source/archive size and SHA-256",
+        "PDF signatures",
+        "repeat input reuses unchanged job"
+      ],
+      "jev_audit": {
+        "model": "jev-1.14.0",
+        "candidate_matters": [
+          "M12383",
+          "M12205"
+        ],
+        "answers": {
+          "intent": {
+            "choice": "REQUEST",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "matter": {
+            "choice": "M12205",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "category": {
+            "choice": "KEY_DOCUMENTS",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          }
+        },
+        "elapsed_ms": 156,
+        "confidence_threshold": 0.8,
+        "probability_threshold": 0.9
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "file_count": 6,
+      "download_bytes": 1070395,
+      "mime_bytes": 1352964,
+      "passed": true
+    },
+    {
+      "name": "paraphrased_transcripts",
+      "input": {
+        "subject": "Written hearing record",
+        "body": "Could you send me the written transcripts of what was said at the hearings in M12451? I need the written record, not audio recordings."
+      },
+      "expected": {
+        "matter": "M12451",
+        "category": "Transcripts",
+        "files": 7,
+        "outcome": "success"
+      },
+      "job_id": "a39c0a3889cb6edee5cb6259",
+      "status": "prepared",
+      "outcome": "success",
+      "pipeline_seconds": 10.729,
+      "checks": [
+        "prepared response hash",
+        "synthetic recipient",
+        "auto-reply header",
+        "correct interpreted matter/category",
+        "all five website counts in reply",
+        "matter metadata",
+        "expected file count",
+        "MIME ZIP equals saved ZIP",
+        "ZIP entry count and CRC",
+        "every source/archive size and SHA-256",
+        "PDF signatures",
+        "repeat input reuses unchanged job"
+      ],
+      "jev_audit": {
+        "model": "jev-1.14.0",
+        "candidate_matters": [
+          "M12451"
+        ],
+        "answers": {
+          "intent": {
+            "choice": "REQUEST",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "matter": {
+            "choice": "M12451",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "category": {
+            "choice": "TRANSCRIPTS",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          }
+        },
+        "elapsed_ms": 111,
+        "confidence_threshold": 0.8,
+        "probability_threshold": 0.9
+      },
+      "counts": {
+        "Exhibits": 221,
+        "Key Documents": 7,
+        "Other Documents": 88,
+        "Transcripts": 7,
+        "Recordings": 8
+      },
+      "file_count": 7,
+      "download_bytes": 5178346,
+      "mime_bytes": 5880807,
+      "passed": true
+    },
+    {
+      "name": "zero_files",
+      "input": {
+        "subject": "Transcript request",
+        "body": "Please send Transcripts for matter M12205."
+      },
+      "expected": {
+        "matter": "M12205",
+        "category": "Transcripts",
+        "files": 0,
+        "outcome": "success"
+      },
+      "job_id": "ce1334016b73a1b934e797bf",
+      "status": "prepared",
+      "outcome": "success",
+      "pipeline_seconds": 3.505,
+      "checks": [
+        "prepared response hash",
+        "synthetic recipient",
+        "auto-reply header",
+        "correct interpreted matter/category",
+        "all five website counts in reply",
+        "matter metadata",
+        "expected file count",
+        "zero result has no attachment",
+        "repeat input reuses unchanged job"
+      ],
+      "jev_audit": {
+        "model": "jev-1.14.0",
+        "candidate_matters": [
+          "M12205"
+        ],
+        "answers": {
+          "intent": {
+            "choice": "REQUEST",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "matter": {
+            "choice": "M12205",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "category": {
+            "choice": "TRANSCRIPTS",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          }
+        },
+        "elapsed_ms": 166,
+        "confidence_threshold": 0.8,
+        "probability_threshold": 0.9
+      },
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "file_count": 0,
+      "download_bytes": 0,
+      "mime_bytes": 1186,
+      "passed": true
+    },
+    {
+      "name": "ambiguous_matter",
+      "input": {
+        "subject": "Exhibits request",
+        "body": "Please send the Exhibits, but I cannot remember whether the matter is M12205 or M12383. I do not know which one is correct. Please do not send both."
+      },
+      "expected": {
+        "matter": null,
+        "category": null,
+        "files": 0,
+        "outcome": "clarification"
+      },
+      "job_id": "f5213439ddcae2681327021f",
+      "status": "prepared",
+      "outcome": "clarification",
+      "pipeline_seconds": 0.19,
+      "checks": [
+        "prepared response hash",
+        "synthetic recipient",
+        "auto-reply header",
+        "clarification without retrieval or attachment",
+        "repeat input reuses unchanged job"
+      ],
+      "jev_audit": {
+        "model": "jev-1.14.0",
+        "candidate_matters": [
+          "M12205",
+          "M12383"
+        ],
+        "answers": {
+          "intent": {
+            "choice": "REQUEST",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "matter": {
+            "choice": "AMBIGUOUS",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "category": {
+            "choice": "EXHIBITS",
+            "confidence": 0.98,
+            "selected_probability": 0.98
+          }
+        },
+        "elapsed_ms": 163,
+        "confidence_threshold": 0.8,
+        "probability_threshold": 0.9
+      },
+      "mime_bytes": 779,
+      "passed": true
+    }
+  ]
+}

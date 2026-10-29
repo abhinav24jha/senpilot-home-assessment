@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "uarb-email-agent"
+version = "0.1.0"
+description = "Email-driven UARB document retrieval using Jev and browser-free HTTP replay"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["httpx>=0.28,<0.29", "python-dotenv>=1.0,<2"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+uarb-agent = "uarb_agent.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["uarb_agent*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

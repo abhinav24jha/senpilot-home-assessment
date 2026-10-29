@@ -1,0 +1,77 @@
+{
+  "run_utc": "20261029T031424Z",
+  "scope": "Synthetic emails, real Jev and public UARB; local MIME replies only, no SMTP or IMAP.",
+  "data_directory": "data/validation-20261029T031424Z",
+  "passed": 1,
+  "total": 1,
+  "cases": [
+    {
+      "name": "body_only_matter",
+      "input": {
+        "subject": "A quick regulatory research request",
+        "body": "Hi Agent,\n\nPlease send me the Other Documents files for matter M12205.\n\nThanks, Alex"
+      },
+      "expected": {
+        "matter": "M12205",
+        "category": "Other Documents",
+        "files": 10,
+        "outcome": "success"
+      },
+      "job_id": "b8831a6502cd9493eb617344",
+      "status": "prepared",
+      "outcome": "success",
+      "pipeline_seconds": 11.335,
+      "jev_audit": {
+        "model": "jev-1.14.0",
+        "candidate_matters": [
+          "M12205"
+        ],
+        "answers": {
+          "intent": {
+            "choice": "REQUEST",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "matter": {
+            "choice": "M12205",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          },
+          "category": {
+            "choice": "OTHER_DOCUMENTS",
+            "confidence": 1.0,
+            "selected_probability": 1.0
+          }
+        },
+        "elapsed_ms": 217,
+        "confidence_threshold": 0.8,
+        "probability_threshold": 0.9
+      },
+      "checks": [
+        "prepared response hash",
+        "synthetic recipient",
+        "auto-reply header",
+        "correct interpreted matter/category",
+        "all five website counts in reply",
+        "matter metadata",
+        "expected file count",
+        "MIME ZIP equals saved ZIP",
+        "ZIP entry count and CRC",
+        "every source/archive size and SHA-256",
+        "PDF signatures",
+        "repeat input reuses unchanged job"
+      ],
+      "counts": {
+        "Exhibits": 13,
+        "Key Documents": 6,
+        "Other Documents": 44,
+        "Transcripts": 0,
+        "Recordings": 0
+      },
+      "file_count": 10,
+      "download_bytes": 7009940,
+      "mime_bytes": 9146915,
+      "passed": true
+    }
+  ]
+}

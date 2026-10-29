@@ -1,0 +1,16 @@
+[Unit]
+Description=UARB email document agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=uarb
+WorkingDirectory=/opt/uarb-agent
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/opt/uarb-agent/.venv/bin/uarb-agent --env /opt/uarb-agent/.env watch --send
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
